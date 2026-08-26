@@ -5,10 +5,9 @@ export default function Home({ onSelect }) {
   return (
     <div className="home">
       <header className="home-header">
-        <div className="home-header__mark">MLE</div>
-        <h1 className="home-header__title">
-          TryOut <span>AALKADA</span>
-        </h1>
+        <p className="home-header__greeting">Halo Halo Halo 👋</p>
+        <span className="eyebrow home-header__eyebrow">Try Out</span>
+        <h1 className="home-header__title">AALKADA</h1>
         <p className="home-header__sub">
           Akuntansi &middot; Analisis Laporan Keuangan &middot; Audit Risk Based &middot; Data Analytics
         </p>

@@ -1,4 +1,4 @@
-# MLE TryOut AALKADA
+# AALKADA — Try Out
 
 Aplikasi latihan soal & try out interaktif untuk 4 materi: **A**kuntansi, **A**nalisis **L**aporan **K**euangan, **A**udit Risk Based, dan **D**ata **A**nalytics (AALKADA). Dibangun sebagai static web app (React + Vite) — tidak butuh backend/database, semua bank soal ter-bundle sebagai data statis.
 
@@ -7,12 +7,14 @@ Aplikasi latihan soal & try out interaktif untuk 4 materi: **A**kuntansi, **A**n
 - **4 menu Latihan** (Akuntansi, ALK, Audit Risk Based, Data Analytics & Decision Dashboard) — masing-masing 50 soal random, waktu 100 menit.
 - **Try Out Real** — 60 soal campuran (15 soal per materi), waktu 90 menit.
 - Soal & urutan opsi jawaban diacak setiap sesi dimulai.
+- Dialog konfirmasi "Dah siap belom?" sebelum tiap sesi mulai.
 - Timer countdown otomatis submit saat waktu habis.
 - Navigator soal (lompat ke soal manapun, lihat status terjawab/belum).
-- Skor akhir + breakdown per materi (khusus Try Out Real).
+- Dialog konfirmasi setiap kali keluar dari sesi yang sedang berjalan — lewat ikon Home, tombol back HP/browser (hardware back), maupun tutup/refresh tab.
+- Skor akhir dengan pesan lulus/tidak lulus (passing grade default 70, bisa diubah di `src/data/categories.js`) + breakdown per materi (khusus Try Out Real).
 - Halaman pembahasan lengkap per soal (benar/salah/tidak dijawab) dengan filter.
-- Dialog konfirmasi setiap kali keluar dari sesi yang sedang berjalan (klik ikon Home atau tutup/refresh tab).
-- Mobile-first, responsive, tanpa dependency backend.
+- Tombol "Ulangi?" (sesi baru dengan soal random) dan "Home?" di akhir halaman pembahasan.
+- Mobile-first, responsive, tema merah maroon & putih, tanpa dependency backend.
 
 ## Menjalankan secara lokal
 

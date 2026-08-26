@@ -44,3 +44,5 @@ export const TRYOUT_REAL = {
 }
 
 export const CATEGORY_MAP = Object.fromEntries(CATEGORIES.map((c) => [c.key, c]))
+
+export const PASSING_GRADE = 70

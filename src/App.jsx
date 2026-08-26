@@ -37,7 +37,12 @@ export default function App() {
       : buildLatihanSession(activeKey, meta.questionCount)
     setSession(built)
     setEndTime(Date.now() + meta.durationMinutes * 60 * 1000)
+    setResult(null)
     setScreen('quiz')
+  }
+
+  const handleRepeat = () => {
+    handleStart()
   }
 
   const handleSubmit = (answers) => {
@@ -78,7 +83,7 @@ export default function App() {
       )}
 
       {screen === 'review' && result && meta && (
-        <Review result={result} meta={meta} onHome={handleBackHome} />
+        <Review result={result} meta={meta} onHome={handleBackHome} onRepeat={handleRepeat} />
       )}
     </div>
   )

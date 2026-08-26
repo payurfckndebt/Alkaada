@@ -55,8 +55,17 @@
 
 .result-status {
   font-family: var(--font-display);
-  font-size: 20px;
-  margin: 4px 0 22px;
+  font-size: 22px;
+  font-weight: 800;
+  margin: 4px 0 4px;
+}
+.result-status--pass { color: var(--green); }
+.result-status--fail { color: var(--brass-dark); }
+
+.result-passgrade {
+  font-size: 11px;
+  color: var(--text-mute);
+  margin: 0 0 22px;
 }
 
 .result-stats {

@@ -3,7 +3,7 @@ import { evaluatePass } from '../utils/quizEngine.js'
 import './Result.css'
 
 function scoreLabel(passed) {
-  return passed ? 'Ntapss, jago bgt dah pokoknya!' : 'Isokey kawan, masih try out kok'
+  return passed ? 'Nah Ntapss, jago bgt dah pokoknya!' : 'Belum lulus but isokey kawan, masih try out kok'
 }
 
 export default function Result({ result, meta, isMixed, onReview, onHome }) {

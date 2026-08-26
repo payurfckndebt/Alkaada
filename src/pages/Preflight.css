@@ -1,0 +1,107 @@
+.preflight {
+  min-height: 100%;
+  background: var(--paper);
+  padding: 20px 20px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.preflight-back {
+  align-self: flex-start;
+  background: none;
+  border: none;
+  color: var(--text-mute);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 10px 6px;
+  margin-bottom: 4px;
+}
+.preflight-back:hover { color: var(--text-dark); }
+
+.preflight-card {
+  width: 100%;
+  max-width: 460px;
+  background: var(--paper-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: 30px 26px 26px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.preflight-card__code {
+  font-size: 12px;
+  color: var(--brass-dark);
+  background: var(--brass-tint);
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-bottom: 16px;
+}
+
+.preflight-card h1 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+
+.preflight-card__sub {
+  color: var(--text-mute);
+  font-size: 14px;
+  margin: 0 0 22px;
+  line-height: 1.5;
+}
+
+.preflight-card .punch-row { --perf-top: 0; margin-bottom: 22px; }
+.preflight-card .punch { opacity: 0.08; margin-top: 0; }
+
+.preflight-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 26px;
+}
+.preflight-stats > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.preflight-stats__num {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--ink-800);
+}
+.preflight-stats span:last-child {
+  font-size: 11px;
+  color: var(--text-mute);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.preflight-rules {
+  text-align: left;
+  margin: 0 0 28px;
+  padding: 0 0 0 18px;
+  color: var(--text-mute);
+  font-size: 13px;
+  line-height: 1.7;
+}
+.preflight-rules li { margin-bottom: 4px; }
+
+.preflight-start {
+  width: 100%;
+  background: var(--ink-900);
+  color: var(--text-onink);
+  border: none;
+  border-radius: 999px;
+  padding: 15px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.12s ease, background 0.15s ease;
+}
+.preflight-start:hover { background: var(--ink-800); }
+.preflight-start:active { transform: scale(0.98); }

@@ -1,0 +1,87 @@
+.cd-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(14, 26, 43, 0.55);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+  animation: cdFade 0.15s ease-out;
+}
+@keyframes cdFade { from { opacity: 0; } to { opacity: 1; } }
+
+.cd-card {
+  width: 100%;
+  max-width: 380px;
+  background: var(--paper-card);
+  border-radius: var(--radius-lg);
+  padding: 28px 24px 22px;
+  box-shadow: var(--shadow-pop);
+  text-align: center;
+  animation: cdPop 0.18s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+@keyframes cdPop { from { transform: translateY(8px) scale(0.97); opacity: 0; } to { transform: none; opacity: 1; } }
+
+.cd-badge {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  margin: 0 auto 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 20px;
+}
+.cd-badge--danger { background: var(--red-tint); color: var(--red); }
+.cd-badge--brass { background: var(--brass-tint); color: var(--brass-dark); }
+
+.cd-title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 8px;
+  color: var(--text-dark);
+}
+
+.cd-message {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--text-mute);
+  margin: 0 0 22px;
+}
+
+.cd-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.cd-btn {
+  flex: 1;
+  border: none;
+  border-radius: 999px;
+  padding: 12px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.12s ease, filter 0.12s ease;
+}
+.cd-btn:active { transform: scale(0.97); }
+.cd-btn--ghost {
+  background: var(--paper-dim);
+  color: var(--text-dark);
+}
+.cd-btn--ghost:hover { filter: brightness(0.97); }
+.cd-btn--danger {
+  background: var(--red);
+  color: #fff;
+}
+.cd-btn--danger:hover { filter: brightness(1.08); }
+.cd-btn--brass {
+  background: var(--brass);
+  color: var(--ink-900);
+}
+.cd-btn--brass:hover { filter: brightness(1.06); }

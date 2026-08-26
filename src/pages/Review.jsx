@@ -9,7 +9,7 @@ const FILTERS = [
   { key: 'empty', label: 'Kosong' },
 ]
 
-export default function Review({ result, meta, onHome }) {
+export default function Review({ result, meta, onHome, onRepeat, onBackToResult }) {
   const [filter, setFilter] = useState('all')
 
   const items = useMemo(() => {
@@ -24,8 +24,8 @@ export default function Review({ result, meta, onHome }) {
   return (
     <div className="review">
       <header className="review-header">
-        <button className="quiz-icon-btn" onClick={onHome} aria-label="Kembali ke beranda">
-          <HomeIcon />
+        <button className="quiz-icon-btn" onClick={onBackToResult} aria-label="Kembali ke hasil skor">
+          <BackIcon />
         </button>
         <div>
           <span className="eyebrow review-header__title">{meta.title}</span>
@@ -81,15 +81,19 @@ export default function Review({ result, meta, onHome }) {
           </article>
         ))}
       </main>
+
+      <div className="review-endactions">
+        <button className="review-endbtn review-endbtn--ghost" onClick={onHome}>Home?</button>
+        <button className="review-endbtn review-endbtn--primary" onClick={onRepeat}>Ulangi?</button>
+      </div>
     </div>
   )
 }
 
-function HomeIcon() {
+function BackIcon() {
   return (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path d="M4 11.5 12 4l8 7.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M6 10v9a1 1 0 0 0 1 1h3v-6h4v6h3a1 1 0 0 0 1-1v-9" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M15 5 8 12l7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   )
 }

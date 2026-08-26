@@ -82,6 +82,6 @@
 .cd-btn--danger:hover { filter: brightness(1.08); }
 .cd-btn--brass {
   background: var(--brass);
-  color: var(--ink-900);
+  color: #fff;
 }
 .cd-btn--brass:hover { filter: brightness(1.06); }

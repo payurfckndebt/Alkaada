@@ -1,16 +1,14 @@
-import { CATEGORY_MAP } from '../data/categories.js'
+import { CATEGORY_MAP, PASSING_GRADE } from '../data/categories.js'
 import './Result.css'
 
 function scoreLabel(pct) {
-  if (pct >= 85) return 'Sangat Baik'
-  if (pct >= 70) return 'Baik'
-  if (pct >= 50) return 'Cukup'
-  return 'Perlu Belajar Lagi'
+  return pct >= PASSING_GRADE ? 'jir jago uga u' : 'gpp cuy, masi try out elah'
 }
 
 export default function Result({ result, meta, isMixed, onReview, onHome }) {
   const { correct, total, scorePercent, detail } = result
-  const wrong = total - correct
+  const unanswered = detail.filter((d) => !d.isAnswered).length
+  const wrong = total - correct - unanswered
   const circumference = 2 * Math.PI * 54
 
   const perCategory = isMixed
@@ -45,7 +43,10 @@ export default function Result({ result, meta, isMixed, onReview, onHome }) {
           </div>
         </div>
 
-        <h2 className="result-status">{scoreLabel(scorePercent)}</h2>
+        <h2 className={`result-status ${scorePercent >= PASSING_GRADE ? 'result-status--pass' : 'result-status--fail'}`}>
+          {scoreLabel(scorePercent)}
+        </h2>
+        <p className="result-passgrade mono">Passing grade: {PASSING_GRADE}</p>
 
         <div className="result-stats">
           <div>
@@ -55,6 +56,10 @@ export default function Result({ result, meta, isMixed, onReview, onHome }) {
           <div>
             <span className="mono result-stats__num" style={{ color: 'var(--red)' }}>{wrong}</span>
             <span>Salah</span>
+          </div>
+          <div>
+            <span className="mono result-stats__num" style={{ color: 'var(--text-mute)' }}>{unanswered}</span>
+            <span>Belum Dijawab</span>
           </div>
           <div>
             <span className="mono result-stats__num">{total}</span>

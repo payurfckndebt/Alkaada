@@ -1,5 +1,5 @@
 import bank from '../data/questionBank.json'
-import { TRYOUT_REAL } from '../data/categories.js'
+import { TRYOUT_REAL, PASSING_GRADE } from '../data/categories.js'
 
 function shuffle(arr) {
   const a = [...arr]
@@ -52,17 +52,50 @@ export function buildLatihanSession(categoryKey, questionCount) {
 }
 
 export function buildTryoutRealSession() {
-  const categoryKeys = ['akuntansi', 'alk', 'audit', 'dataanalytics']
-  let combined = []
-  categoryKeys.forEach((key) => {
-    const picked = sampleQuestions(bank[key] || [], TRYOUT_REAL.perCategory)
-    combined = combined.concat(picked.map((q) => ({ ...q, __category: key })))
+  // Builds the exam as sequential blocks per the official rule: Part 1 (Accounting &
+  // Laporan Keuangan) must be fully ordered before Part 2 (Data Analytics & Audit).
+  // Questions are shuffled within each part, but the two parts are never interleaved.
+  const session = []
+  TRYOUT_REAL.parts.forEach((part) => {
+    const perCategory = part.count / part.categories.length
+    let block = []
+    part.categories.forEach((key) => {
+      const picked = sampleQuestions(bank[key] || [], perCategory)
+      block = block.concat(picked.map((q) => ({ ...q, __category: key, __part: part.key })))
+    })
+    block = shuffle(block)
+    session.push(...block)
   })
-  combined = shuffle(combined)
-  return combined.map((q, idx) => ({
+  return session.map((q, idx) => ({
     ...randomizeOptionOrder(q, `tor-${idx}-${q.id}`),
     category: q.__category,
+    part: q.__part,
   }))
+}
+
+// Given a session index and a meta with `parts` config, returns info about which
+// part that question belongs to, its 1-based position within the part, and the
+// part's start/end index boundaries within the flat session array.
+export function getPartInfo(meta, index) {
+  if (!meta?.parts) return null
+  let offset = 0
+  for (let i = 0; i < meta.parts.length; i++) {
+    const part = meta.parts[i]
+    const start = offset
+    const end = offset + part.count // exclusive
+    if (index < end) {
+      return {
+        part,
+        partIndex: i,
+        isLastPart: i === meta.parts.length - 1,
+        start,
+        end,
+        localIndex: index - start, // 0-based within the part
+      }
+    }
+    offset = end
+  }
+  return null
 }
 
 export function scoreSession(questions, answers) {
@@ -81,4 +114,29 @@ export function scoreSession(questions, answers) {
   const total = questions.length
   const scorePercent = total > 0 ? Math.round((correct / total) * 1000) / 10 : 0
   return { correct, total, scorePercent, detail }
+}
+
+// Determines pass/fail. For sessions with `parts` (Try Out Real), the KKM/passing grade
+// applies PER SECTION independently — a candidate must clear 75 in Bagian 1 AND Bagian 2
+// separately, not just on the combined 80-question average. Regular single-category
+// Latihan sessions still use one overall passing grade check.
+export function evaluatePass(meta, result) {
+  if (meta?.parts) {
+    const partScores = meta.parts.map((part) => {
+      const items = result.detail.filter((d) => d.part === part.key)
+      const correct = items.filter((d) => d.isCorrect).length
+      const total = items.length
+      const scorePercent = total > 0 ? Math.round((correct / total) * 1000) / 10 : 0
+      return {
+        key: part.key,
+        label: part.label,
+        correct,
+        total,
+        scorePercent,
+        passed: scorePercent >= PASSING_GRADE,
+      }
+    })
+    return { passed: partScores.every((p) => p.passed), partScores }
+  }
+  return { passed: result.scorePercent >= PASSING_GRADE, partScores: null }
 }

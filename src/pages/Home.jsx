@@ -36,7 +36,7 @@ export default function Home({ onSelect, onHistory, onBankSoal, historyCount }) 
               <span aria-hidden="true">&bull;</span>
               <span>{TRYOUT_REAL.durationMinutes} menit</span>
               <span aria-hidden="true">&bull;</span>
-              <span>4 materi &times; 15 soal</span>
+              <span>2 bagian berurutan</span>
             </div>
           </div>
           <div className="tor-card__arrow" aria-hidden="true">&rarr;</div>

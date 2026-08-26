@@ -67,7 +67,14 @@
 .result-passgrade {
   font-size: 11px;
   color: var(--text-mute);
+  margin: 0 0 6px;
+}
+.result-passnote {
+  font-size: 11px;
+  color: var(--text-mute);
+  line-height: 1.5;
   margin: 0 0 22px;
+  padding: 0 6px;
 }
 
 .result-stats {
@@ -103,7 +110,17 @@
   overflow: hidden;
 }
 .result-breakdown__fill { height: 100%; background: var(--brass); }
-.result-breakdown__frac { width: 40px; text-align: right; color: var(--text-mute); }
+.result-breakdown__frac { width: 62px; text-align: right; color: var(--text-mute); flex-shrink: 0; }
+.result-breakdown__fill--fail { background: var(--red); }
+.result-breakdown__badge {
+  flex-shrink: 0;
+  font-size: 9.5px;
+  font-weight: 700;
+  padding: 3px 7px;
+  border-radius: 999px;
+}
+.badge--pass { background: var(--green-tint); color: var(--green); }
+.badge--fail { background: var(--red-tint); color: var(--red); }
 
 .result-actions { display: flex; flex-direction: column; gap: 10px; }
 .result-btn {

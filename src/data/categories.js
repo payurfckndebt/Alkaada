@@ -37,12 +37,27 @@ export const TRYOUT_REAL = {
   key: 'tryout-real',
   code: 'TOR',
   title: 'Try Out Real',
-  subtitle: 'Simulasi ujian gabungan — 15 soal tiap materi',
-  questionCount: 60,
-  durationMinutes: 90,
-  perCategory: 15,
+  subtitle: 'Simulasi ujian resmi — 2 bagian berurutan',
+  questionCount: 80,
+  durationMinutes: 120,
+  parts: [
+    {
+      key: 'part1',
+      label: 'Bagian 1',
+      subtitle: 'Accounting & Laporan Keuangan',
+      categories: ['akuntansi', 'alk'],
+      count: 40,
+    },
+    {
+      key: 'part2',
+      label: 'Bagian 2',
+      subtitle: 'Data Analytics & Audit',
+      categories: ['dataanalytics', 'audit'],
+      count: 40,
+    },
+  ],
 }
 
 export const CATEGORY_MAP = Object.fromEntries(CATEGORIES.map((c) => [c.key, c]))
 
-export const PASSING_GRADE = 70
+export const PASSING_GRADE = 75

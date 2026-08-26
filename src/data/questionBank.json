@@ -5981,6 +5981,66 @@
       },
       "answer": "A",
       "explanation": "Threshold digunakan sebagai titik referensi; jika metrik (misal: rasio NPL) menyentuh atau melampaui batas ini, sistem akan memberi sinyal bagi analis untuk segera melakukan investigasi lanjutan."
+    },
+    {
+      "id": "DA-29",
+      "question": "Jika analis ingin menangkap perubahan jangka pendek dari satu bulan ke bulan berikutnya, indikator pertumbuhan yang paling tepat digunakan adalah ...",
+      "options": {
+        "A": "MoM",
+        "B": "YoY",
+        "C": "ANOVA",
+        "D": "Left Outer Join"
+      },
+      "answer": "A",
+      "explanation": "MoM (Month-on-Month) membandingkan nilai pada bulan berjalan dengan bulan sebelumnya secara rinci untuk menangkap perubahan atau tren jangka pendek bulanan."
+    },
+    {
+      "id": "DA-30",
+      "question": "Dalam forecasting, holdout period digunakan untuk ...",
+      "options": {
+        "A": "menguji model pada data yang tidak digunakan saat membangun model",
+        "B": "menghapus seluruh seasonality",
+        "C": "mengubah MA Short menjadi MA Long",
+        "D": "membuat seluruh error menjadi nol"
+      },
+      "answer": "A",
+      "explanation": "Holdout period (data pengujian/out-of-sample) disisihkan dari dataset awal untuk melakukan evaluasi objektif atas performa akurasi model peramalan pada data yang belum pernah dilihat model sebelumnya."
+    },
+    {
+      "id": "DA-31",
+      "question": "Pada monitoring NPF Rate, MA-3 menembus MA-6 dari atas ke bawah. Interpretasi yang paling tepat adalah ...",
+      "options": {
+        "A": "NPF pasti akan naik terus",
+        "B": "forecast tidak perlu digunakan lagi",
+        "C": "MA Short menembus MA Long dari bawah ke atas",
+        "D": "tekanan NPF jangka pendek mulai mereda dibanding tren jangka panjang"
+      },
+      "answer": "D",
+      "explanation": "Ketika moving average jangka pendek (MA-3) turun dan menembus moving average jangka panjang (MA-6) dari atas ke bawah, ini menandakan crossover penurunan yang mengindikasikan tekanan perburukan NPF jangka pendek mulai mereda dibanding tren historis jangka panjangnya."
+    },
+    {
+      "id": "DA-32",
+      "question": "Jika analis ingin mencari satu nilai input agar satu output mencapai target tertentu, tools Excel yang paling sesuai adalah ...",
+      "options": {
+        "A": "Scenario Analysis",
+        "B": "Goal Seek",
+        "C": "Solver",
+        "D": "PivotTable"
+      },
+      "answer": "B",
+      "explanation": "Goal Seek pada Microsoft Excel adalah fitur yang dirancang khusus untuk membalikkan kalkulasi guna menemukan nilai dari satu input variable untuk mencapai satu target value/output tertentu."
+    },
+    {
+      "id": "DA-33",
+      "question": "Dalam Solver, batasan seperti Total Cost <= Budget dan Total Days <= Available Days disebut ...",
+      "options": {
+        "A": "residuals",
+        "B": "dimension",
+        "C": "constraints",
+        "D": "forecast errors"
+      },
+      "answer": "C",
+      "explanation": "Constraints (kendala/batasan) dalam analisis optimasi Solver adalah sekumpulan syarat atau pembatas numerik yang harus dipenuhi oleh solusi preskriptif."
     }
   ]
 }

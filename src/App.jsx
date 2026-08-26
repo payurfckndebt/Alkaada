@@ -7,8 +7,8 @@ import Review from './pages/Review.jsx'
 import History from './pages/History.jsx'
 import BankSoal from './pages/BankSoal.jsx'
 import PasswordDialog from './components/PasswordDialog.jsx'
-import { CATEGORY_MAP, TRYOUT_REAL, PASSING_GRADE } from './data/categories.js'
-import { buildLatihanSession, buildTryoutRealSession, scoreSession } from './utils/quizEngine.js'
+import { CATEGORY_MAP, TRYOUT_REAL } from './data/categories.js'
+import { buildLatihanSession, buildTryoutRealSession, scoreSession, evaluatePass } from './utils/quizEngine.js'
 import { loadHistory, addHistoryEntry, clearHistory } from './utils/history.js'
 
 function getMeta(key) {
@@ -62,7 +62,7 @@ export default function App() {
     const scored = scoreSession(session, answers)
     setResult(scored)
     const meta = getMeta(activeKey)
-    const passed = scored.scorePercent >= PASSING_GRADE
+    const { passed } = evaluatePass(meta, scored)
     const entry = {
       id: `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
       key: activeKey,

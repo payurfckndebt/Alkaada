@@ -5,13 +5,13 @@ Aplikasi latihan soal & try out interaktif untuk 4 materi: **A**kuntansi, **A**n
 ## Fitur
 
 - **4 menu Latihan** (Akuntansi, ALK, Audit Risk Based, Data Analytics & Decision Dashboard) — masing-masing 50 soal random, waktu 100 menit.
-- **Try Out Real** — 60 soal campuran (15 soal per materi), waktu 90 menit.
+- **Try Out Real** — simulasi ujian resmi, 2 bagian berurutan (Bagian 1: 40 soal Accounting & Laporan Keuangan, Bagian 2: 40 soal Data Analytics & Audit setelah Bagian 1 selesai), total 80 soal, waktu 120 menit. Begitu Bagian 1 diselesaikan, soalnya terkunci dan tidak bisa diakses ulang.
 - Soal & urutan opsi jawaban diacak setiap sesi dimulai.
 - Dialog konfirmasi "Dah siap belom?" sebelum tiap sesi mulai.
 - Timer countdown otomatis submit saat waktu habis.
 - Navigator soal (lompat ke soal manapun, lihat status terjawab/belum).
 - Dialog konfirmasi setiap kali keluar dari sesi yang sedang berjalan — lewat ikon Home, tombol back HP/browser (hardware back), maupun tutup/refresh tab.
-- Skor akhir dengan pesan lulus/tidak lulus (passing grade default 70, bisa diubah di `src/data/categories.js`) + breakdown per materi (khusus Try Out Real).
+- Skor akhir dengan pesan lulus/tidak lulus (passing grade default 75, bisa diubah di `src/data/categories.js`) + breakdown per materi. Khusus Try Out Real, kelulusan dievaluasi **per bagian** (KKM 75 di Bagian 1 DAN Bagian 2 masing-masing, bukan dari rata-rata gabungan 80 soal) — lolos hanya jika kedua bagian sama-sama mencapai KKM.
 - Halaman pembahasan lengkap per soal (benar/salah/tidak dijawab) dengan filter.
 - Tombol "Ulangi?" (sesi baru dengan soal random) dan "Home?" di akhir halaman pembahasan.
 - **Riwayat sesi** — mencatat skor & materi tiap sesi yang diselesaikan selama tab masih terbuka (pakai `sessionStorage`, tanpa database — otomatis hilang saat tab ditutup).
@@ -63,7 +63,7 @@ Hasil build ada di folder `dist/`.
     ├── main.jsx              # entry point
     ├── App.jsx               # state machine layar (home/preflight/quiz/result/review/history/banksoal)
     ├── data/
-    │   ├── questionBank.json # 498 soal (Akuntansi 215+, ALK 124+, Audit 114, Data Analytics 28)
+    │   ├── questionBank.json # 503 soal (Akuntansi 215+, ALK 124+, Audit 114, Data Analytics 33)
     │   └── categories.js     # metadata 4 materi + Try Out Real + PASSING_GRADE
     ├── utils/
     │   ├── quizEngine.js     # sampling soal, acak opsi, scoring
@@ -110,5 +110,5 @@ Key kategori (`akuntansi`, `alk`, `audit`, `dataanalytics`) harus sesuai dengan 
 ## Catatan sumber soal
 
 - Bank soal Akuntansi/ALK/Audit diambil dari kompilasi bank soal latihan (215/124/114 soal) ditambah 4 studi kasus (dikonversi menjadi 17 soal pilihan ganda).
-- Bank soal Data Analytics diambil dari modul latihan Data Analytics OJK (28 soal, Modul 1–10).
+- Bank soal Data Analytics diambil dari modul latihan Data Analytics OJK (33 soal, Modul 1–10).
 - Karena bank soal Data Analytics lebih sedikit dari yang lain, soal dapat berulang dalam satu sesi 50 soal (sesuai preferensi yang dipilih saat pengembangan).

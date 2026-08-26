@@ -1,8 +1,9 @@
 import { CATEGORY_MAP, PASSING_GRADE } from '../data/categories.js'
+import { evaluatePass } from '../utils/quizEngine.js'
 import './Result.css'
 
-function scoreLabel(pct) {
-  return pct >= PASSING_GRADE ? 'Wih udah siap ujian nih' : 'Its Okay, masi try out kok'
+function scoreLabel(passed) {
+  return passed ? 'jir jago uga u' : 'gpp cuy, masi try out elah'
 }
 
 export default function Result({ result, meta, isMixed, onReview, onHome }) {
@@ -10,6 +11,9 @@ export default function Result({ result, meta, isMixed, onReview, onHome }) {
   const unanswered = detail.filter((d) => !d.isAnswered).length
   const wrong = total - correct - unanswered
   const circumference = 2 * Math.PI * 54
+  const hasParts = Boolean(meta.parts)
+
+  const { passed, partScores } = evaluatePass(meta, result)
 
   const perCategory = isMixed
     ? Object.keys(CATEGORY_MAP).map((key) => {
@@ -43,10 +47,17 @@ export default function Result({ result, meta, isMixed, onReview, onHome }) {
           </div>
         </div>
 
-        <h2 className={`result-status ${scorePercent >= PASSING_GRADE ? 'result-status--pass' : 'result-status--fail'}`}>
-          {scoreLabel(scorePercent)}
+        <h2 className={`result-status ${passed ? 'result-status--pass' : 'result-status--fail'}`}>
+          {scoreLabel(passed)}
         </h2>
-        <p className="result-passgrade mono">Passing grade: {PASSING_GRADE}</p>
+        <p className="result-passgrade mono">
+          {hasParts ? `KKM ${PASSING_GRADE} per bagian` : `Passing grade: ${PASSING_GRADE}`}
+        </p>
+        {hasParts && (
+          <p className="result-passnote">
+            Skor {scorePercent} di atas adalah rata-rata gabungan &mdash; kelulusan ditentukan dari nilai tiap bagian di bawah, bukan dari angka gabungan ini.
+          </p>
+        )}
 
         <div className="result-stats">
           <div>
@@ -66,6 +77,27 @@ export default function Result({ result, meta, isMixed, onReview, onHome }) {
             <span>Total Soal</span>
           </div>
         </div>
+
+        {partScores && (
+          <div className="result-breakdown">
+            <span className="eyebrow">Rincian &amp; Kelulusan per Bagian</span>
+            {partScores.map((p) => (
+              <div className="result-breakdown__row" key={p.key}>
+                <span className="mono">{p.label}</span>
+                <div className="result-breakdown__bar">
+                  <div
+                    className={`result-breakdown__fill ${p.passed ? '' : 'result-breakdown__fill--fail'}`}
+                    style={{ width: p.total ? `${(p.correct / p.total) * 100}%` : '0%' }}
+                  />
+                </div>
+                <span className="mono result-breakdown__frac">{p.correct}/{p.total} &middot; {p.scorePercent}</span>
+                <span className={`result-breakdown__badge mono ${p.passed ? 'badge--pass' : 'badge--fail'}`}>
+                  {p.passed ? 'Lulus' : 'Belum'}
+                </span>
+              </div>
+            ))}
+          </div>
+        )}
 
         {perCategory && (
           <div className="result-breakdown">

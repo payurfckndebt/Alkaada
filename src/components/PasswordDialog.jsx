@@ -48,7 +48,7 @@ export default function PasswordDialog({ open, onSuccess, onCancel }) {
           autoFocus
         />
         {error && <p className="pwd-error">Password salah, coba lagi.</p>}
-        <p className="pwd-hint">Belum punya password? Hubungi admin ya.</p>
+        <p className="pwd-hint">Belum punya password? Hubungi admin ya, flhmlm.</p>
         <div className="pwd-actions">
           <button type="button" className="pwd-btn pwd-btn--ghost" onClick={handleCancel}>Batal</button>
           <button type="submit" className="pwd-btn pwd-btn--primary">Buka</button>

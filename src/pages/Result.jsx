@@ -2,7 +2,7 @@ import { CATEGORY_MAP, PASSING_GRADE } from '../data/categories.js'
 import './Result.css'
 
 function scoreLabel(pct) {
-  return pct >= PASSING_GRADE ? 'jir jago uga u' : 'gpp cuy, masi try out elah'
+  return pct >= PASSING_GRADE ? 'Wih, udah siap bgt nih ujian' : 'Gapapa kawan, kan masi Try Out'
 }
 
 export default function Result({ result, meta, isMixed, onReview, onHome }) {

@@ -92,7 +92,7 @@ export default function Result({ result, meta, isMixed, onReview, onHome }) {
                 </div>
                 <span className="mono result-breakdown__frac">{p.correct}/{p.total} &middot; {p.scorePercent}</span>
                 <span className={`result-breakdown__badge mono ${p.passed ? 'badge--pass' : 'badge--fail'}`}>
-                  {p.passed ? 'Lulus' : 'Belum'}
+                  {p.passed ? 'Lulus ges' : 'Belum lulus, bisa yok!'}
                 </span>
               </div>
             ))}

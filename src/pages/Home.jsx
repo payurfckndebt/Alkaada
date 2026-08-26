@@ -1,19 +1,14 @@
 import { CATEGORIES, TRYOUT_REAL } from '../data/categories.js'
 import './Home.css'
 
-export default function Home({ onSelect, onHistory, onBankSoal, historyCount }) {
+export default function Home({ onSelect }) {
   return (
     <div className="home">
-      <div className="home-topbar">
-        <button className="home-topbar__btn" onClick={onHistory}>
-          <HistoryIcon />
-          Riwayat{historyCount > 0 ? ` (${historyCount})` : ''}
-        </button>
-      </div>
-
       <header className="home-header">
-        <span className="eyebrow home-header__eyebrow">Try Out</span>
-        <h1 className="home-header__title">AALKADA</h1>
+        <div className="home-header__mark">MLE</div>
+        <h1 className="home-header__title">
+          TryOut <span>AALKADA</span>
+        </h1>
         <p className="home-header__sub">
           Akuntansi &middot; Analisis Laporan Keuangan &middot; Audit Risk Based &middot; Data Analytics
         </p>
@@ -69,42 +64,9 @@ export default function Home({ onSelect, onHistory, onBankSoal, historyCount }) 
         </div>
       </section>
 
-      <section className="banklock-section">
-        <button className="banklock-card" onClick={onBankSoal}>
-          <div className="banklock-card__icon">
-            <LockIcon />
-          </div>
-          <div className="banklock-card__text">
-            <span className="eyebrow">Terkunci</span>
-            <h3>Bank Soal</h3>
-            <p>Semua soal &amp; kunci jawaban &mdash; butuh password untuk membuka.</p>
-          </div>
-          <span className="banklock-card__arrow" aria-hidden="true">&rarr;</span>
-        </button>
-      </section>
-
       <footer className="home-footer">
         <p>Bank soal disusun dari materi persiapan AP OJK &mdash; acak setiap sesi, lengkap dengan pembahasan.</p>
       </footer>
     </div>
-  )
-}
-
-function HistoryIcon() {
-  return (
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path d="M3 12a9 9 0 1 0 3-6.7" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M3 4v5h5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M12 7v5l3.5 2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  )
-}
-
-function LockIcon() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <rect x="5" y="11" width="14" height="9" rx="2" stroke="currentColor" strokeWidth="1.8" />
-      <path d="M8 11V7a4 4 0 0 1 8 0v4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-    </svg>
   )
 }

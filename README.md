@@ -1,4 +1,4 @@
-# AALKADA — Try Out
+# MLE TryOut AALKADA
 
 Aplikasi latihan soal & try out interaktif untuk 4 materi: **A**kuntansi, **A**nalisis **L**aporan **K**euangan, **A**udit Risk Based, dan **D**ata **A**nalytics (AALKADA). Dibangun sebagai static web app (React + Vite) — tidak butuh backend/database, semua bank soal ter-bundle sebagai data statis.
 
@@ -7,21 +7,12 @@ Aplikasi latihan soal & try out interaktif untuk 4 materi: **A**kuntansi, **A**n
 - **4 menu Latihan** (Akuntansi, ALK, Audit Risk Based, Data Analytics & Decision Dashboard) — masing-masing 50 soal random, waktu 100 menit.
 - **Try Out Real** — 60 soal campuran (15 soal per materi), waktu 90 menit.
 - Soal & urutan opsi jawaban diacak setiap sesi dimulai.
-- Dialog konfirmasi "Dah siap belom?" sebelum tiap sesi mulai.
 - Timer countdown otomatis submit saat waktu habis.
 - Navigator soal (lompat ke soal manapun, lihat status terjawab/belum).
-- Dialog konfirmasi setiap kali keluar dari sesi yang sedang berjalan — lewat ikon Home, tombol back HP/browser (hardware back), maupun tutup/refresh tab.
-- Skor akhir dengan pesan lulus/tidak lulus (passing grade default 70, bisa diubah di `src/data/categories.js`) + breakdown per materi (khusus Try Out Real).
+- Skor akhir + breakdown per materi (khusus Try Out Real).
 - Halaman pembahasan lengkap per soal (benar/salah/tidak dijawab) dengan filter.
-- Tombol "Ulangi?" (sesi baru dengan soal random) dan "Home?" di akhir halaman pembahasan.
-- **Riwayat sesi** — mencatat skor & materi tiap sesi yang diselesaikan selama tab masih terbuka (pakai `sessionStorage`, tanpa database — otomatis hilang saat tab ditutup).
-- **Bank Soal terkunci** — menu berisi seluruh soal + kunci jawaban + pembahasan, dibuka dengan password (`kelasbea3x`, dicek langsung di kode klien, tidak disimpan di database manapun).
-- Mobile-first, responsive, tema merah cerah & putih, tanpa dependency backend.
-
-### Catatan soal Riwayat & Bank Soal
-
-- **Riwayat** disimpan di `sessionStorage` browser (bukan localStorage/database) — artinya riwayat hanya bertahan selama tab itu terbuka dan hilang begitu tab ditutup, sesuai permintaan "tanpa database".
-- **Bank Soal** dilindungi password di sisi klien saja. Karena ini aplikasi statis tanpa backend, ini hanyalah kunci ringan (soft-lock) untuk mencegah akses tidak sengaja — bukan keamanan sesungguhnya, karena kode sumbernya (termasuk password) tetap bisa dibaca siapa pun yang membuka source aplikasi. Kalau butuh proteksi yang lebih serius, perlu backend/auth sungguhan.
+- Dialog konfirmasi setiap kali keluar dari sesi yang sedang berjalan (klik ikon Home atau tutup/refresh tab).
+- Mobile-first, responsive, tanpa dependency backend.
 
 ## Menjalankan secara lokal
 
@@ -61,25 +52,21 @@ Hasil build ada di folder `dist/`.
 ├── vite.config.js
 └── src/
     ├── main.jsx              # entry point
-    ├── App.jsx               # state machine layar (home/preflight/quiz/result/review/history/banksoal)
+    ├── App.jsx               # state machine layar (home/preflight/quiz/result/review)
     ├── data/
     │   ├── questionBank.json # 498 soal (Akuntansi 215+, ALK 124+, Audit 114, Data Analytics 28)
-    │   └── categories.js     # metadata 4 materi + Try Out Real + PASSING_GRADE
+    │   └── categories.js     # metadata 4 materi + Try Out Real
     ├── utils/
-    │   ├── quizEngine.js     # sampling soal, acak opsi, scoring
-    │   └── history.js        # riwayat sesi via sessionStorage (tanpa database)
+    │   └── quizEngine.js     # sampling soal, acak opsi, scoring
     ├── components/
     │   ├── Timer.jsx
-    │   ├── ConfirmDialog.jsx
-    │   └── PasswordDialog.jsx # gate password untuk menu Bank Soal
+    │   └── ConfirmDialog.jsx
     ├── pages/
     │   ├── Home.jsx / Home.css
     │   ├── Preflight.jsx / Preflight.css
     │   ├── Quiz.jsx / Quiz.css
     │   ├── Result.jsx / Result.css
-    │   ├── Review.jsx / Review.css
-    │   ├── History.jsx / History.css
-    │   └── BankSoal.jsx / BankSoal.css
+    │   └── Review.jsx / Review.css
     └── styles/
         └── global.css        # design tokens (warna, tipografi)
 ```

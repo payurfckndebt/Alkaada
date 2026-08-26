@@ -141,7 +141,7 @@
   line-height: 1.5;
   color: var(--text-dark);
 }
-.quiz-option:hover { border-color: rgba(163,40,58,0.5); }
+.quiz-option:hover { border-color: rgba(198,161,91,0.5); }
 .quiz-option:active { transform: scale(0.995); }
 .quiz-option--selected {
   border-color: var(--brass);

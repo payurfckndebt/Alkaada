@@ -24,17 +24,6 @@ export default function Quiz({ session, meta, endTime, onExit, onSubmit }) {
     return () => window.removeEventListener('beforeunload', handler)
   }, [])
 
-  // Guard against accidental hardware/browser back button during the exam.
-  useEffect(() => {
-    window.history.pushState({ quizGuard: true }, '')
-    const onPopState = () => {
-      setExitDialog(true)
-      window.history.pushState({ quizGuard: true }, '')
-    }
-    window.addEventListener('popstate', onPopState)
-    return () => window.removeEventListener('popstate', onPopState)
-  }, [])
-
   const handleAnswer = (letter) => {
     setAnswers((prev) => ({ ...prev, [current.instanceId]: letter }))
   }
@@ -144,11 +133,11 @@ export default function Quiz({ session, meta, endTime, onExit, onSubmit }) {
 
       <ConfirmDialog
         open={submitDialog}
-        title="Yakin mau submit?"
+        title="Akhiri sesi ujian?"
         message={
           answeredCount < total
-            ? `Halo? Yakin udahan? Masih ada ${total - answeredCount} soal yang belum kamu jawab.`
-            : 'Halo? Yakin udahan? Semua soal udah kejawab kok.'
+            ? `Masih ada ${total - answeredCount} soal yang belum kamu jawab. Yakin ingin submit sekarang?`
+            : 'Semua soal sudah terjawab. Submit sekarang untuk melihat skor dan pembahasan.'
         }
         confirmLabel="Ya, Submit"
         cancelLabel="Cek Lagi"

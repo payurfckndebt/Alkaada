@@ -1,12 +1,6 @@
 import './Preflight.css'
 
-import { useState } from 'react'
-import ConfirmDialog from '../components/ConfirmDialog.jsx'
-import './Preflight.css'
-
 export default function Preflight({ meta, onStart, onBack }) {
-  const [confirmOpen, setConfirmOpen] = useState(false)
-
   return (
     <div className="preflight">
       <button className="preflight-back" onClick={onBack} aria-label="Kembali ke beranda">&larr; Beranda</button>
@@ -44,19 +38,8 @@ export default function Preflight({ meta, onStart, onBack }) {
           )}
         </ul>
 
-        <button className="preflight-start" onClick={() => setConfirmOpen(true)}>Mulai Sesi</button>
+        <button className="preflight-start" onClick={onStart}>Mulai Sesi</button>
       </div>
-
-      <ConfirmDialog
-        open={confirmOpen}
-        title="Dah siap belom?"
-        message={`${meta.questionCount} soal, ${meta.durationMinutes} menit. Begitu mulai, timer langsung jalan.`}
-        confirmLabel="Gaskeun"
-        cancelLabel="Bentar Deh"
-        tone="brass"
-        onConfirm={onStart}
-        onCancel={() => setConfirmOpen(false)}
-      />
     </div>
   )
 }

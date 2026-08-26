@@ -9,7 +9,7 @@ const FILTERS = [
   { key: 'empty', label: 'Kosong' },
 ]
 
-export default function Review({ result, meta, onHome, onRepeat }) {
+export default function Review({ result, meta, onHome }) {
   const [filter, setFilter] = useState('all')
 
   const items = useMemo(() => {
@@ -81,11 +81,6 @@ export default function Review({ result, meta, onHome, onRepeat }) {
           </article>
         ))}
       </main>
-
-      <div className="review-endactions">
-        <button className="review-endbtn review-endbtn--ghost" onClick={onHome}>Home?</button>
-        <button className="review-endbtn review-endbtn--primary" onClick={onRepeat}>Ulangi?</button>
-      </div>
     </div>
   )
 }

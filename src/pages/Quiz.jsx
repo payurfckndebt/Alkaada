@@ -147,8 +147,8 @@ export default function Quiz({ session, meta, endTime, onExit, onSubmit }) {
         title="Yakin mau submit?"
         message={
           answeredCount < total
-            ? `Santai, masi lama, uda yakin emg? Masih ada ${total - answeredCount} soal yang belum kamu jawab.`
-            : 'Santai, masi lama, uda yakin emg? Semua soal udah kejawab kok.'
+            ? `Halo? Yakin udahan? Masih ada ${total - answeredCount} soal yang belum kamu jawab.`
+            : 'Halo? Yakin udahan? Semua soal udah kejawab kok.'
         }
         confirmLabel="Ya, Submit"
         cancelLabel="Cek Lagi"

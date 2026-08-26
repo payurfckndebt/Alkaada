@@ -14,7 +14,14 @@ Aplikasi latihan soal & try out interaktif untuk 4 materi: **A**kuntansi, **A**n
 - Skor akhir dengan pesan lulus/tidak lulus (passing grade default 70, bisa diubah di `src/data/categories.js`) + breakdown per materi (khusus Try Out Real).
 - Halaman pembahasan lengkap per soal (benar/salah/tidak dijawab) dengan filter.
 - Tombol "Ulangi?" (sesi baru dengan soal random) dan "Home?" di akhir halaman pembahasan.
-- Mobile-first, responsive, tema merah maroon & putih, tanpa dependency backend.
+- **Riwayat sesi** — mencatat skor & materi tiap sesi yang diselesaikan selama tab masih terbuka (pakai `sessionStorage`, tanpa database — otomatis hilang saat tab ditutup).
+- **Bank Soal terkunci** — menu berisi seluruh soal + kunci jawaban + pembahasan, dibuka dengan password (`kelasbea3x`, dicek langsung di kode klien, tidak disimpan di database manapun).
+- Mobile-first, responsive, tema merah cerah & putih, tanpa dependency backend.
+
+### Catatan soal Riwayat & Bank Soal
+
+- **Riwayat** disimpan di `sessionStorage` browser (bukan localStorage/database) — artinya riwayat hanya bertahan selama tab itu terbuka dan hilang begitu tab ditutup, sesuai permintaan "tanpa database".
+- **Bank Soal** dilindungi password di sisi klien saja. Karena ini aplikasi statis tanpa backend, ini hanyalah kunci ringan (soft-lock) untuk mencegah akses tidak sengaja — bukan keamanan sesungguhnya, karena kode sumbernya (termasuk password) tetap bisa dibaca siapa pun yang membuka source aplikasi. Kalau butuh proteksi yang lebih serius, perlu backend/auth sungguhan.
 
 ## Menjalankan secara lokal
 
@@ -54,21 +61,25 @@ Hasil build ada di folder `dist/`.
 ├── vite.config.js
 └── src/
     ├── main.jsx              # entry point
-    ├── App.jsx               # state machine layar (home/preflight/quiz/result/review)
+    ├── App.jsx               # state machine layar (home/preflight/quiz/result/review/history/banksoal)
     ├── data/
     │   ├── questionBank.json # 498 soal (Akuntansi 215+, ALK 124+, Audit 114, Data Analytics 28)
-    │   └── categories.js     # metadata 4 materi + Try Out Real
+    │   └── categories.js     # metadata 4 materi + Try Out Real + PASSING_GRADE
     ├── utils/
-    │   └── quizEngine.js     # sampling soal, acak opsi, scoring
+    │   ├── quizEngine.js     # sampling soal, acak opsi, scoring
+    │   └── history.js        # riwayat sesi via sessionStorage (tanpa database)
     ├── components/
     │   ├── Timer.jsx
-    │   └── ConfirmDialog.jsx
+    │   ├── ConfirmDialog.jsx
+    │   └── PasswordDialog.jsx # gate password untuk menu Bank Soal
     ├── pages/
     │   ├── Home.jsx / Home.css
     │   ├── Preflight.jsx / Preflight.css
     │   ├── Quiz.jsx / Quiz.css
     │   ├── Result.jsx / Result.css
-    │   └── Review.jsx / Review.css
+    │   ├── Review.jsx / Review.css
+    │   ├── History.jsx / History.css
+    │   └── BankSoal.jsx / BankSoal.css
     └── styles/
         └── global.css        # design tokens (warna, tipografi)
 ```

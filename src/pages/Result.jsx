@@ -1,10 +1,7 @@
 import { CATEGORY_MAP, PASSING_GRADE } from '../data/categories.js'
 import { evaluatePass } from '../utils/quizEngine.js'
+import { scoreLabel } from '../utils/messages.js'
 import './Result.css'
-
-function scoreLabel(passed) {
-  return passed ? 'Nah Ntapss, jago bgt dah pokoknya!' : 'Belum lulus but isokey kawan, masih try out kok'
-}
 
 export default function Result({ result, meta, isMixed, onReview, onHome }) {
   const { correct, total, scorePercent, detail } = result
@@ -92,7 +89,7 @@ export default function Result({ result, meta, isMixed, onReview, onHome }) {
                 </div>
                 <span className="mono result-breakdown__frac">{p.correct}/{p.total} &middot; {p.scorePercent}</span>
                 <span className={`result-breakdown__badge mono ${p.passed ? 'badge--pass' : 'badge--fail'}`}>
-                  {p.passed ? 'Lulus ges' : 'Belum lulus, bisa yok!'}
+                  {p.passed ? 'Lulus' : 'Belum'}
                 </span>
               </div>
             ))}

@@ -52,10 +52,11 @@ export function buildLatihanSession(categoryKey, questionCount) {
 }
 
 export function buildTryoutRealSession() {
-  // Builds the exam as sequential blocks per the official rule: Part 1 (Accounting &
-  // Laporan Keuangan) must be fully ordered before Part 2 (Data Analytics & Audit).
-  // Questions are shuffled within each part, but the two parts are never interleaved.
-  const session = []
+  // Returns two SEPARATE, independently-timed-but-shared-clock sessions per the official rule:
+  // Part 1 (Accounting & Laporan Keuangan) must be fully completed — with its own score shown —
+  // before Part 2 (Data Analytics & Audit) can even be started. Each is its own flat array;
+  // the caller (App) is responsible for sequencing them and only combining scores at the end.
+  const result = {}
   TRYOUT_REAL.parts.forEach((part) => {
     const perCategory = part.count / part.categories.length
     let block = []
@@ -64,38 +65,13 @@ export function buildTryoutRealSession() {
       block = block.concat(picked.map((q) => ({ ...q, __category: key, __part: part.key })))
     })
     block = shuffle(block)
-    session.push(...block)
+    result[part.key] = block.map((q, idx) => ({
+      ...randomizeOptionOrder(q, `tor-${part.key}-${idx}-${q.id}`),
+      category: q.__category,
+      part: q.__part,
+    }))
   })
-  return session.map((q, idx) => ({
-    ...randomizeOptionOrder(q, `tor-${idx}-${q.id}`),
-    category: q.__category,
-    part: q.__part,
-  }))
-}
-
-// Given a session index and a meta with `parts` config, returns info about which
-// part that question belongs to, its 1-based position within the part, and the
-// part's start/end index boundaries within the flat session array.
-export function getPartInfo(meta, index) {
-  if (!meta?.parts) return null
-  let offset = 0
-  for (let i = 0; i < meta.parts.length; i++) {
-    const part = meta.parts[i]
-    const start = offset
-    const end = offset + part.count // exclusive
-    if (index < end) {
-      return {
-        part,
-        partIndex: i,
-        isLastPart: i === meta.parts.length - 1,
-        start,
-        end,
-        localIndex: index - start, // 0-based within the part
-      }
-    }
-    offset = end
-  }
-  return null
+  return result // { part1: [...40 questions], part2: [...40 questions] }
 }
 
 export function scoreSession(questions, answers) {
@@ -112,6 +88,17 @@ export function scoreSession(questions, answers) {
     }
   })
   const total = questions.length
+  const scorePercent = total > 0 ? Math.round((correct / total) * 1000) / 10 : 0
+  return { correct, total, scorePercent, detail }
+}
+
+// Combines two already-scored parts into one summary result object for the final
+// screen — used only after BOTH parts are complete. Pass/fail is still determined
+// per-part (see evaluatePass), this is purely for the combined display numbers.
+export function combineResults(resultA, resultB) {
+  const detail = [...resultA.detail, ...resultB.detail]
+  const correct = resultA.correct + resultB.correct
+  const total = resultA.total + resultB.total
   const scorePercent = total > 0 ? Math.round((correct / total) * 1000) / 10 : 0
   return { correct, total, scorePercent, detail }
 }

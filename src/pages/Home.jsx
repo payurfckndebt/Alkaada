@@ -77,7 +77,7 @@ export default function Home({ onSelect, onHistory, onBankSoal, historyCount }) 
           <div className="banklock-card__text">
             <span className="eyebrow">Terkunci</span>
             <h3>Bank Soal</h3>
-            <p>Semua soal &amp; kunci jawaban &mdash; butuh password. Belum punya? Hubungi admin @flhmlm.</p>
+            <p>Semua soal &amp; kunci jawaban &mdash; butuh password. Belum punya? Hubungi admin.</p>
           </div>
           <span className="banklock-card__arrow" aria-hidden="true">&rarr;</span>
         </button>

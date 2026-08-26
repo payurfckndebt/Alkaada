@@ -4216,7 +4216,7 @@
     },
     {
       "id": "ALK-123",
-      "question": "Melanjutkan soal sebelumnya (current ratio 1,5x, aset lancar 2.000, kewajiban lancar 1.333), apabila diketahui jumlah persediaannya sebesar 1.500, berapakah quick ratio-nya?",
+      "question": "Sebuah entitas memiliki current ratio 1,5 kali dengan aset lancar sebesar 2.000 dan kewajiban lancar sebesar 1.333. Apabila diketahui jumlah persediaannya sebesar 1.500, berapakah quick ratio-nya?",
       "options": {
         "A": "0,25 kali",
         "B": "0,17 kali",
@@ -4228,7 +4228,7 @@
     },
     {
       "id": "ALK-124",
-      "question": "Melanjutkan soal sebelumnya, apabila diketahui jumlah piutangnya sebesar 150, berapakah cash ratio-nya (kas = aset lancar - persediaan - piutang)?",
+      "question": "Sebuah entitas memiliki aset lancar sebesar 2.000, kewajiban lancar sebesar 1.333, dan persediaan sebesar 1.500. Apabila diketahui jumlah piutangnya sebesar 150, berapakah cash ratio-nya (kas = aset lancar - persediaan - piutang)?",
       "options": {
         "A": "0,18 kali",
         "B": "0,17 kali",

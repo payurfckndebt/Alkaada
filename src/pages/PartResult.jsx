@@ -6,8 +6,9 @@ import { scoreLabel } from '../utils/messages.js'
 import './Result.css'
 import './PartResult.css'
 
-export default function PartResult({ part, scored, passed, endTime, onContinue, onExit, onTimeUp, nextPart }) {
+export default function PartResult({ part, scored, passed, endTime, onContinue, onExit, onTimeUp, onRepeat, nextPart }) {
   const [exitDialog, setExitDialog] = useState(false)
+  const [repeatDialog, setRepeatDialog] = useState(false)
   const { correct, total, scorePercent, detail } = scored
   const unanswered = detail.filter((d) => !d.isAnswered).length
   const wrong = total - correct - unanswered
@@ -93,6 +94,7 @@ export default function PartResult({ part, scored, passed, endTime, onContinue, 
 
         <div className="result-actions">
           <button className="result-btn result-btn--primary" onClick={onContinue}>Lanjut ke {nextPart.label} &rarr;</button>
+          <button className="result-btn result-btn--ghost" onClick={() => setRepeatDialog(true)}>Ulangi dari Awal</button>
         </div>
       </div>
 
@@ -105,6 +107,17 @@ export default function PartResult({ part, scored, passed, endTime, onContinue, 
         tone="danger"
         onConfirm={onExit}
         onCancel={() => setExitDialog(false)}
+      />
+
+      <ConfirmDialog
+        open={repeatDialog}
+        title="Ulangi dari awal?"
+        message={`Nilai ${part.label} yang barusan kamu dapat akan hilang, dan soal akan diacak ulang dari Bagian 1. Yakin mau mengulang?`}
+        confirmLabel="Ya, Ulangi"
+        cancelLabel="Batal"
+        tone="danger"
+        onConfirm={onRepeat}
+        onCancel={() => setRepeatDialog(false)}
       />
     </div>
   )

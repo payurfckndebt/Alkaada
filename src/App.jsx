@@ -217,6 +217,7 @@ export default function App() {
           onContinue={handleContinueToPart2}
           onExit={handleBackHome}
           onTimeUp={() => handleSubmitPart2({})}
+          onRepeat={handleRepeat}
         />
       )}
 

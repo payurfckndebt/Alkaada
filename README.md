@@ -6,6 +6,7 @@ Aplikasi latihan soal & try out interaktif untuk 4 materi: **A**kuntansi, **A**n
 
 - **4 menu Latihan** (Akuntansi, ALK, Audit Risk Based, Data Analytics & Decision Dashboard) — masing-masing 50 soal random, waktu 100 menit.
 - **Try Out Real** — simulasi ujian resmi, 2 bagian berurutan (Bagian 1: 40 soal Accounting & Laporan Keuangan, Bagian 2: 40 soal Data Analytics & Audit). Bagian 1 harus benar-benar selesai dan nilainya keluar dulu (di layar tersendiri) sebelum Bagian 2 bisa dimulai — soal Bagian 1 tidak bisa diakses ulang setelah itu. Total 80 soal, satu timer 120 menit berjalan terus tanpa jeda/reset (termasuk saat layar nilai Bagian 1 ditampilkan). Nilai akhir gabungan baru muncul setelah Bagian 2 selesai.
+- **YKPPA (Yang Kita Pelajari Pelajari Aja)** — menu di bawah Try Out Real. Satu sesi tunggal (tidak dibagi bagian), waktu tetap 100 menit, berisi **semua soal** dari bank soal khususnya (`src/data/ykppaBank.json`, 140 soal — 30 Data Analytics, 50 Audit, 40 Akuntansi, 20 ALK) tanpa pengurangan/sampling, hanya diacak urutannya. Skor dihitung dari total 140 soal tersebut, dengan rincian per materi di halaman hasil.
 - Soal & urutan opsi jawaban diacak setiap sesi dimulai.
 - Dialog konfirmasi "Dah siap belom?" sebelum tiap sesi mulai.
 - Timer countdown otomatis submit saat waktu habis.
@@ -63,8 +64,9 @@ Hasil build ada di folder `dist/`.
     ├── main.jsx              # entry point
     ├── App.jsx               # state machine layar (home/preflight/quiz/result/review/history/banksoal)
     ├── data/
-    │   ├── questionBank.json # 503 soal (Akuntansi 215+, ALK 124+, Audit 114, Data Analytics 33)
-    │   └── categories.js     # metadata 4 materi + Try Out Real + PASSING_GRADE
+    │   ├── questionBank.json # 503 soal (Akuntansi 215+, ALK 124+, Audit 114, Data Analytics 33) — dipakai Latihan & Try Out Real
+    │   ├── ykppaBank.json    # 140 soal khusus menu YKPPA (30 DA, 50 Audit, 40 Akuntansi, 20 ALK)
+    │   └── categories.js     # metadata 4 materi + Try Out Real + YKPPA + PASSING_GRADE
     ├── utils/
     │   ├── quizEngine.js     # sampling soal, acak opsi, scoring, gabung hasil 2 bagian
     │   ├── history.js        # riwayat sesi via sessionStorage (tanpa database)

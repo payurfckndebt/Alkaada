@@ -1,4 +1,5 @@
 import bank from '../data/questionBank.json'
+import ykppaBank from '../data/ykppaBank.json'
 import { TRYOUT_REAL, PASSING_GRADE } from '../data/categories.js'
 
 function shuffle(arr) {
@@ -49,6 +50,17 @@ export function buildLatihanSession(categoryKey, questionCount) {
   const pool = bank[categoryKey] || []
   const picked = sampleQuestions(pool, questionCount)
   return picked.map((q, idx) => randomizeOptionOrder(q, `${categoryKey}-${idx}-${q.id}`))
+}
+
+// YKPPA ("Yang Kita Pelajari Pelajari Aja") uses every single question from its own
+// dedicated bank exactly once per session (no sampling/reduction) — just shuffled order,
+// single continuous part, fixed 100-minute timer. Spans all 4 materi mixed together.
+export function buildYkppaSession() {
+  const shuffled = shuffle(ykppaBank)
+  return shuffled.map((q, idx) => ({
+    ...randomizeOptionOrder(q, `ykppa-${idx}-${q.id}`),
+    category: q.category,
+  }))
 }
 
 export function buildTryoutRealSession() {

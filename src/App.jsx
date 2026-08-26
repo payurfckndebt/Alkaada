@@ -8,10 +8,11 @@ import Review from './pages/Review.jsx'
 import History from './pages/History.jsx'
 import BankSoal from './pages/BankSoal.jsx'
 import PasswordDialog from './components/PasswordDialog.jsx'
-import { CATEGORY_MAP, TRYOUT_REAL } from './data/categories.js'
+import { CATEGORY_MAP, TRYOUT_REAL, YKPPA } from './data/categories.js'
 import {
   buildLatihanSession,
   buildTryoutRealSession,
+  buildYkppaSession,
   scoreSession,
   combineResults,
   evaluatePass,
@@ -19,7 +20,9 @@ import {
 import { loadHistory, addHistoryEntry, clearHistory } from './utils/history.js'
 
 function getMeta(key) {
-  return key === TRYOUT_REAL.key ? TRYOUT_REAL : CATEGORY_MAP[key]
+  if (key === TRYOUT_REAL.key) return TRYOUT_REAL
+  if (key === YKPPA.key) return YKPPA
+  return CATEGORY_MAP[key]
 }
 
 export default function App() {
@@ -46,6 +49,7 @@ export default function App() {
   const [resultPart1, setResultPart1] = useState(null)
 
   const isTryoutReal = activeKey === TRYOUT_REAL.key
+  const isYkppa = activeKey === YKPPA.key
 
   const handleSelect = (key) => {
     setActiveKey(key)
@@ -71,6 +75,9 @@ export default function App() {
       setCurrentPartKey('part1')
       setResultPart1(null)
       setSession(null)
+    } else if (key === YKPPA.key) {
+      setSession(buildYkppaSession())
+      setTorParts(null)
     } else {
       setSession(buildLatihanSession(key, meta.questionCount))
       setTorParts(null)
@@ -156,7 +163,7 @@ export default function App() {
   }
 
   const meta = activeKey ? getMeta(activeKey) : null
-  const isMixed = isTryoutReal
+  const isMixed = isTryoutReal || isYkppa
 
   // Which part config + result are we showing on 'result-part1'?
   const part1Config = TRYOUT_REAL.parts[0]

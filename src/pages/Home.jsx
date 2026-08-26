@@ -1,4 +1,4 @@
-import { CATEGORIES, TRYOUT_REAL } from '../data/categories.js'
+import { CATEGORIES, TRYOUT_REAL, YKPPA } from '../data/categories.js'
 import './Home.css'
 
 export default function Home({ onSelect, onHistory, onBankSoal, historyCount }) {
@@ -37,6 +37,28 @@ export default function Home({ onSelect, onHistory, onBankSoal, historyCount }) 
               <span>{TRYOUT_REAL.durationMinutes} menit</span>
               <span aria-hidden="true">&bull;</span>
               <span>2 bagian berurutan</span>
+            </div>
+          </div>
+          <div className="tor-card__arrow" aria-hidden="true">&rarr;</div>
+        </button>
+
+        <button className="tor-card ykppa-card perforated" onClick={() => onSelect(YKPPA.key)}>
+          <div className="tor-card__stub">
+            <span className="eyebrow">Semua Materi &middot; 1 Sesi</span>
+            <span className="mono tor-card__code">{YKPPA.code}&ndash;01</span>
+          </div>
+          <div className="punch-row" style={{ '--perf-top': '0' }}>
+            {Array.from({ length: 14 }).map((_, i) => <span className="punch" key={i} />)}
+          </div>
+          <div className="tor-card__body">
+            <h2>{YKPPA.title}</h2>
+            <p>{YKPPA.subtitle}</p>
+            <div className="tor-card__meta mono">
+              <span>{YKPPA.questionCount} soal</span>
+              <span aria-hidden="true">&bull;</span>
+              <span>{YKPPA.durationMinutes} menit</span>
+              <span aria-hidden="true">&bull;</span>
+              <span>1 bagian, tanpa dibagi</span>
             </div>
           </div>
           <div className="tor-card__arrow" aria-hidden="true">&rarr;</div>

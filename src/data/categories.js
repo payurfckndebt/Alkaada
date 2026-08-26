@@ -58,6 +58,17 @@ export const TRYOUT_REAL = {
   ],
 }
 
+import ykppaBank from './ykppaBank.json'
+
+export const YKPPA = {
+  key: 'ykppa',
+  code: 'YKPPA',
+  title: 'YKPPA',
+  subtitle: 'Yang Kita Pelajari Pelajari Aja — semua soal, 1 sesi penuh',
+  questionCount: ykppaBank.length,
+  durationMinutes: 100,
+}
+
 export const CATEGORY_MAP = Object.fromEntries(CATEGORIES.map((c) => [c.key, c]))
 
 export const PASSING_GRADE = 75

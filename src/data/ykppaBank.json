@@ -1,0 +1,1822 @@
+[
+  {
+    "id": "YDA-1",
+    "question": "Sebuah dataset berisi satu baris untuk setiap LJK pada setiap bulan pelaporan. Jika LJK yang sama muncul enam kali selama Januari-Juni, bagaimana satu baris data seharusnya dipahami?",
+    "options": {
+      "A": "Satu sektor pengawasan",
+      "B": "Satu LJK pada satu bulan pelaporan",
+      "C": "Satu LJK selama satu semester",
+      "D": "Satu variabel dalam data dictionary"
+    },
+    "answer": "B",
+    "explanation": "Dataset tersebut memiliki granularitas (level of detail) per LJK per bulan, sehingga satu baris secara spesifik mewakili satu institusi (LJK) pada periode satu bulan tertentu.",
+    "category": "dataanalytics"
+  },
+  {
+    "id": "YDA-2",
+    "question": "Ketika menganalisis Total Assets per Juni 2026, perlakuan yang paling tepat adalah ...",
+    "options": {
+      "A": "menjumlahkan Total Assets Januari sampai Juni",
+      "B": "mengubah Total Assets menjadi flow",
+      "C": "menggunakan nilai pada titik waktu Juni 2026",
+      "D": "menghitung rata-rata seluruh dimension"
+    },
+    "answer": "C",
+    "explanation": "Total Assets adalah variabel stock (posisi neraca) yang merepresentasikan saldo akumulatif pada suatu titik waktu tertentu (as of), bukan variabel flow yang bisa dijumlahkan sepanjang waktu.",
+    "category": "dataanalytics"
+  },
+  {
+    "id": "YDA-3",
+    "question": "Data Exposure lebih besar daripada Total Assets, padahal tipe data dan formatnya sudah benar. Pemeriksaan lanjutan yang paling sesuai adalah ...",
+    "options": {
+      "A": "mengganti semua null menjadi nol",
+      "B": "business logic validation",
+      "C": "menambah seluruh baris dengan Append",
+      "D": "menghapus semua field kategori"
+    },
+    "answer": "B",
+    "explanation": "Secara konsep bisnis, nilai Exposure (eksposur risiko keuangan) semestinya tidak melebihi Total Assets sebuah entitas. Jika terjadi anomali ini, yang paling tepat adalah melakukan validasi logika bisnis (business logic validation).",
+    "category": "dataanalytics"
+  },
+  {
+    "id": "YDA-4",
+    "question": "Pada kolom Complaints ditemukan nilai kosong. Mengapa nilai tersebut tidak boleh otomatis diubah menjadi 0?",
+    "options": {
+      "A": "Karena blank dapat berarti data belum tersedia, sedangkan 0 berarti tidak ada kejadian",
+      "B": "Karena semua blank harus dihapus dari dataset",
+      "C": "Karena 0 hanya boleh digunakan untuk identifier",
+      "D": "Karena missing value selalu menunjukkan duplicate"
+    },
+    "answer": "A",
+    "explanation": "Dalam pembersihan data, missing value (blank) menandakan ketiadaan informasi atau belum dilaporkan. Hal ini memiliki makna statistik yang jauh berbeda dengan nol (0) yang secara eksplisit menunjukkan ketiadaan kejadian komplain.",
+    "category": "dataanalytics"
+  },
+  {
+    "id": "YDA-5",
+    "question": "Setelah Merge dengan Master Entity, jumlah baris tiba-tiba bertambah. Risiko yang paling mungkin perlu diperiksa adalah ...",
+    "options": {
+      "A": "tabel referensi memiliki duplicate key",
+      "B": "worksheet tidak memiliki warna",
+      "C": "semua kolom berubah menjadi dimension",
+      "D": "Power Query tidak dapat melakukan Refresh"
+    },
+    "answer": "A",
+    "explanation": "Jika tabel referensi yang di-join (Merge) memiliki nilai kunci (key) yang duplikat, proses tersebut akan menghasilkan Cartesian product parsial (many-to-many join tanpa disengaja) yang menyebabkan jumlah baris data membengkak.",
+    "category": "dataanalytics"
+  },
+  {
+    "id": "YDA-6",
+    "question": "Tim menerima file pelaporan Januari, Februari, dan Maret dengan struktur kolom yang sama. Operasi Power Query yang paling tepat untuk menyusun data menjadi satu tabel panjang adalah ...",
+    "options": {
+      "A": "Merge",
+      "B": "Left Outer Join",
+      "C": "Refresh",
+      "D": "Append"
+    },
+    "answer": "D",
+    "explanation": "Operasi Append Queries di Power Query berfungsi untuk menumpuk tabel secara vertikal (menambah baris ke bawah) selama struktur kolomnya identik.",
+    "category": "dataanalytics"
+  },
+  {
+    "id": "YDA-7",
+    "question": "Distribusi complaint rate sangat tidak simetris dan terdapat beberapa nilai ekstrem. Ukuran pusat data yang biasanya lebih tahan terhadap nilai ekstrem adalah ...",
+    "options": {
+      "A": "Maximum",
+      "B": "Range",
+      "C": "Median",
+      "D": "Sum"
+    },
+    "answer": "C",
+    "explanation": "Median (nilai tengah) adalah ukuran pemusatan data (central tendency) yang paling robust (kebal/tahan) terhadap pengaruh kemencengan distribusi (skewness) dan adanya nilai-nilai ekstrem (outlier) jika dibandingkan dengan rata-rata (Mean).",
+    "category": "dataanalytics"
+  },
+  {
+    "id": "YDA-8",
+    "question": "Dalam agregasi portofolio, complaint rate antar-LJK sebaiknya dihitung dengan mempertimbangkan total complaints dan total customers. Pendekatan ini disebut ...",
+    "options": {
+      "A": "simple average dari individual rate",
+      "B": "weighted rate",
+      "C": "maximum rate",
+      "D": "minimum rate"
+    },
+    "answer": "B",
+    "explanation": "Weighted rate (rata-rata tertimbang) digunakan agar LJK dengan jumlah customer yang sangat sedikit namun memiliki persentase ekstrem tidak mendistorsi matriks agregat portofolio secara keseluruhan.",
+    "category": "dataanalytics"
+  },
+  {
+    "id": "YDA-9",
+    "question": "Dalam PivotTable, field Sector paling tepat ditempatkan pada area Rows atau Columns karena berfungsi sebagai ...",
+    "options": {
+      "A": "measure",
+      "B": "formula",
+      "C": "dimension",
+      "D": "objective function"
+    },
+    "answer": "C",
+    "explanation": "Dalam analisis data, 'Sector' adalah data kategorikal (dimension) yang berfungsi untuk mengelompokkan, memfilter, atau memotong (slice and dice) data, bukan nilai numerik yang dapat diagregasi/dijumlahkan (measure).",
+    "category": "dataanalytics"
+  },
+  {
+    "id": "YDA-10",
+    "question": "Seorang analis ingin menampilkan perkembangan jumlah pengaduan dari bulan ke bulan. Jenis chart yang paling sesuai adalah ...",
+    "options": {
+      "A": "Scatter Plot",
+      "B": "Heatmap",
+      "C": "Histogram",
+      "D": "Line Chart"
+    },
+    "answer": "D",
+    "explanation": "Line Chart (Diagram Garis) adalah jenis visualisasi yang paling standar, jelas, dan intuitif untuk menyoroti tren perkembangan suatu variabel seiring berjalannya waktu (time series).",
+    "category": "dataanalytics"
+  },
+  {
+    "id": "YDA-11",
+    "question": "Pertanyaan \"apakah rata-rata complaint rate berbeda antara sektor Perbankan dan Pembiayaan?\" termasuk jenis analisis ...",
+    "options": {
+      "A": "comparison analysis",
+      "B": "forecasting",
+      "C": "Goal Seek",
+      "D": "data leakage"
+    },
+    "answer": "A",
+    "explanation": "Analisis yang membandingkan metrik (seperti rata-rata) di antara dua atau lebih kelompok (sektor Perbankan vs Pembiayaan) secara langsung merupakan bentuk dari comparison analysis (analisis perbandingan).",
+    "category": "dataanalytics"
+  },
+  {
+    "id": "YDA-12",
+    "question": "Sebelum membaca nilai correlation, langkah visual yang sebaiknya dilakukan untuk melihat pola hubungan dua variabel numerik adalah ...",
+    "options": {
+      "A": "membuat Scenario Analysis",
+      "B": "membuat Scatter Plot",
+      "C": "menggunakan Goal Seek",
+      "D": "menghapus semua outlier"
+    },
+    "answer": "B",
+    "explanation": "Scatter Plot adalah grafik standar terbaik untuk memvisualisasikan sebaran titik data dua variabel numerik guna mengidentifikasi pola hubungan linear/non-linear sebelum menghitung koefisien korelasi.",
+    "category": "dataanalytics"
+  },
+  {
+    "id": "YDA-13",
+    "question": "Dalam relationship analysis, jika korelasi antara suku bunga dan pengajuan kredit menunjukkan angka -0.85, hal ini mengindikasikan ...",
+    "options": {
+      "A": "Hubungan positif yang sangat kuat",
+      "B": "Hubungan negatif yang kuat, di mana kenaikan suku bunga diikuti penurunan pengajuan kredit",
+      "C": "Tidak ada hubungan antara kedua variabel",
+      "D": "Kenaikan suku bunga akan selalu meningkatkan pengajuan kredit"
+    },
+    "answer": "B",
+    "explanation": "Nilai korelasi mendekati -1 menunjukkan hubungan linear negatif yang kuat antara dua variabel.",
+    "category": "dataanalytics"
+  },
+  {
+    "id": "YDA-14",
+    "question": "Saat melakukan comparison analysis kinerja cabang, analis menemukan fenomena Simpson's Paradox. Fenomena ini terjadi ketika ...",
+    "options": {
+      "A": "Data hilang saat divisualisasikan",
+      "B": "Tren yang muncul pada kelompok data yang berbeda menghilang atau berbalik arah ketika kelompok-kelompok tersebut digabungkan",
+      "C": "Rata-rata dari semua cabang sama dengan nol",
+      "D": "Hasil perbandingan selalu menunjukkan nilai positif"
+    },
+    "answer": "B",
+    "explanation": "Simpson's Paradox adalah fenomena statistik di mana tren atau korelasi tampak pada kelompok yang terpisah, tetapi menghilang atau berbalik ketika data diagregasi secara keseluruhan.",
+    "category": "dataanalytics"
+  },
+  {
+    "id": "YDA-15",
+    "question": "Dalam model regresi NPF Rate, variabel Growth, Collection Rate, Funding Cost, dan Complaint Rate berperan sebagai ...",
+    "options": {
+      "A": "dependent variable",
+      "B": "unique key",
+      "C": "independent variables / predictors",
+      "D": "cleaning log"
+    },
+    "answer": "C",
+    "explanation": "Dalam regresi, variabel yang digunakan untuk memprediksi atau menjelaskan variasi (Growth, Collection Rate, dll) disebut sebagai independent variables atau predictors, sedangkan yang diprediksi (NPF Rate) adalah dependent variable.",
+    "category": "dataanalytics"
+  },
+  {
+    "id": "YDA-16",
+    "question": "Residual yang besar pada hasil regression sebaiknya dipahami sebagai ...",
+    "options": {
+      "A": "bukti bahwa model selalu benar",
+      "B": "selisih yang perlu diperiksa antara actual dan predicted value",
+      "C": "indikasi bahwa semua predictor harus dihapus",
+      "D": "nilai yang sama dengan R Square"
+    },
+    "answer": "B",
+    "explanation": "Residual adalah perbedaan (selisih) antara nilai aktual data dengan nilai yang diprediksi oleh model regresi. Residual yang besar menunjukkan adanya anomali atau varians yang gagal ditangkap model.",
+    "category": "dataanalytics"
+  },
+  {
+    "id": "YDA-17",
+    "question": "Dalam evaluasi model regresi linier, metrik R-Squared (R2) digunakan untuk ...",
+    "options": {
+      "A": "Mengukur persentase varians dari dependent variable yang dapat dijelaskan oleh independent variables",
+      "B": "Menghitung total error absolut dari model",
+      "C": "Menentukan jumlah variabel independen yang harus dihapus",
+      "D": "Mengukur kecepatan waktu komputasi model"
+    },
+    "answer": "A",
+    "explanation": "R-Squared adalah metrik goodness-of-fit yang menunjukkan proporsi variabilitas variabel terikat yang mampu dijelaskan oleh variabel-variabel bebas dalam model.",
+    "category": "dataanalytics"
+  },
+  {
+    "id": "YDA-18",
+    "question": "Masalah multicollinearity dalam analisis regresi linier berganda (multiple linear regression) terjadi apabila ...",
+    "options": {
+      "A": "Model regresi tidak memiliki variabel independen",
+      "B": "Residual dari model berdistribusi normal",
+      "C": "Dua atau lebih variabel independen memiliki korelasi yang sangat tinggi satu sama lain",
+      "D": "Dependent variable adalah tipe data kategorikal"
+    },
+    "answer": "C",
+    "explanation": "Multikolinearitas menyulitkan model untuk membedakan efek individual dari masing-masing variabel independen karena mereka saling berkorelasi kuat.",
+    "category": "dataanalytics"
+  },
+  {
+    "id": "YDA-19",
+    "question": "Moving Average digunakan dalam time series terutama untuk ...",
+    "options": {
+      "A": "membuktikan causality",
+      "B": "mengganti semua missing value",
+      "C": "mengurangi noise dan memperjelas underlying trend",
+      "D": "menentukan objective function"
+    },
+    "answer": "C",
+    "explanation": "Fungsi utama dari Moving Average dalam analisis time series adalah untuk melakukan smoothing data (menghilangkan fluktuasi acak/noise) agar pergerakan tren utama (underlying trend) terlihat lebih jelas.",
+    "category": "dataanalytics"
+  },
+  {
+    "id": "YDA-20",
+    "question": "Jika analis ingin menangkap perubahan jangka pendek dari satu bulan ke bulan berikutnya, indikator pertumbuhan yang paling tepat digunakan adalah ...",
+    "options": {
+      "A": "MoM",
+      "B": "YoY",
+      "C": "ANOVA",
+      "D": "Left Outer Join"
+    },
+    "answer": "A",
+    "explanation": "MoM (Month-on-Month) membandingkan nilai pada bulan berjalan dengan bulan sebelumnya secara rinci untuk menangkap perubahan atau tren jangka pendek harian/bulanan.",
+    "category": "dataanalytics"
+  },
+  {
+    "id": "YDA-21",
+    "question": "Komponen dalam Time Series Analysis yang mencerminkan fluktuasi data yang berulang dalam periode waktu tertentu (misalnya peningkatan penjualan setiap akhir tahun) disebut ...",
+    "options": {
+      "A": "Trend",
+      "B": "Seasonality",
+      "C": "Irregular/Noise",
+      "D": "Cyclical"
+    },
+    "answer": "B",
+    "explanation": "Seasonality (Musiman) adalah pola fluktuasi berkala yang selalu berulang pada rentang waktu yang tetap, seperti musiman kuartalan atau bulanan.",
+    "category": "dataanalytics"
+  },
+  {
+    "id": "YDA-22",
+    "question": "Proses membuat data time series memiliki mean dan varians yang konstan dari waktu ke waktu (tidak memiliki tren) disebut dengan proses ...",
+    "options": {
+      "A": "Smoothing",
+      "B": "Aggregation",
+      "C": "Stationarity (membuat data stasioner)",
+      "D": "Decomposition"
+    },
+    "answer": "C",
+    "explanation": "Data stasioner (stationary) adalah syarat umum dalam banyak model time series (seperti ARIMA), yang berarti sifat statistik data tidak berubah seiring waktu.",
+    "category": "dataanalytics"
+  },
+  {
+    "id": "YDA-23",
+    "question": "Dalam forecasting, holdout period digunakan untuk ...",
+    "options": {
+      "A": "menguji model pada data yang tidak digunakan saat membangun model",
+      "B": "menghapus seluruh seasonality",
+      "C": "mengubah MA Short menjadi MA Long",
+      "D": "membuat seluruh error menjadi nol"
+    },
+    "answer": "A",
+    "explanation": "Holdout period (atau data pengujian/out-of-sample data) disisihkan dari dataset awal untuk melakukan evaluasi objektif atas performa akurasi peramalan model pada data yang belum pernah dilihat sebelumnya.",
+    "category": "dataanalytics"
+  },
+  {
+    "id": "YDA-24",
+    "question": "Pada monitoring NPF Rate, MA-3 menembus MA-6 dari atas ke bawah. Interpretasi yang paling tepat adalah ...",
+    "options": {
+      "A": "NPF pasti akan naik terus",
+      "B": "forecast tidak perlu digunakan lagi",
+      "C": "MA Short menembus MA Long dari bawah ke atas",
+      "D": "tekanan NPF jangka pendek mulai mereda dibanding tren jangka panjang"
+    },
+    "answer": "D",
+    "explanation": "Ketika grafik moving average jangka pendek (MA-3) turun dan menembus moving average jangka panjang (MA-6) dari atas ke bawah, ini menandakan terjadinya crossover penurunan yang mengindikasikan tekanan perburukan NPF jangka pendek mulai mereda dibanding tren historis jangka panjangnya.",
+    "category": "dataanalytics"
+  },
+  {
+    "id": "YDA-25",
+    "question": "Metode forecasting kuantitatif berasumsi bahwa ...",
+    "options": {
+      "A": "Masa depan sepenuhnya tidak dapat diprediksi",
+      "B": "Pola historis dari data masa lalu akan berlanjut ke masa depan",
+      "C": "Prediksi hanya bergantung pada intuisi dan pendapat ahli",
+      "D": "Data kualitatif lebih penting daripada data numerik"
+    },
+    "answer": "B",
+    "explanation": "Teknik peramalan kuantitatif bertumpu pada asumsi bahwa informasi historis mengandung pola yang konsisten dan dapat diproyeksikan.",
+    "category": "dataanalytics"
+  },
+  {
+    "id": "YDA-26",
+    "question": "Pendekatan Exponential Smoothing dalam forecasting memberikan bobot yang ...",
+    "options": {
+      "A": "Sama rata untuk seluruh data historis",
+      "B": "Lebih besar untuk data yang lebih baru (recent) dan mengecil secara eksponensial untuk data yang lebih lampau",
+      "C": "Lebih besar untuk data masa lampau dibandingkan data baru",
+      "D": "Acak untuk setiap observasi"
+    },
+    "answer": "B",
+    "explanation": "Exponential smoothing berasumsi bahwa observasi yang lebih baru lebih relevan untuk memprediksi masa depan, sehingga diberi bobot lebih besar.",
+    "category": "dataanalytics"
+  },
+  {
+    "id": "YDA-27",
+    "question": "Jika analis ingin mencari satu nilai input agar satu output mencapai target tertentu, tools Excel yang paling sesuai adalah ...",
+    "options": {
+      "A": "Scenario Analysis",
+      "B": "Goal Seek",
+      "C": "Solver",
+      "D": "PivotTable"
+    },
+    "answer": "B",
+    "explanation": "Goal Seek pada Microsoft Excel adalah fitur yang dirancang khusus untuk membalikkan kalkulasi guna menemukan nilai dari single input variable untuk mencapai single target value/output tertentu.",
+    "category": "dataanalytics"
+  },
+  {
+    "id": "YDA-28",
+    "question": "Dalam Solver, batasan seperti Total Cost <= Budget dan Total Days <= Available Days disebut ...",
+    "options": {
+      "A": "residuals",
+      "B": "dimension",
+      "C": "constraints",
+      "D": "forecast errors"
+    },
+    "answer": "C",
+    "explanation": "Constraints (kendala/batasan) dalam analisis optimasi Solver adalah sekumpulan syarat atau pembatas numerik yang harus dipenuhi oleh solusi preskriptif.",
+    "category": "dataanalytics"
+  },
+  {
+    "id": "YDA-29",
+    "question": "Dalam Early-Warning System, indikator yang dapat memberikan sinyal perburukan sebelum kejadian benar-benar terjadi disebut sebagai ...",
+    "options": {
+      "A": "Lagging indicator",
+      "B": "Leading indicator",
+      "C": "Coincident indicator",
+      "D": "Retrospective indicator"
+    },
+    "answer": "B",
+    "explanation": "Leading indicator memprediksi kejadian di masa depan, sedangkan lagging indicator baru mengkonfirmasi tren setelah kejadian berlangsung.",
+    "category": "dataanalytics"
+  },
+  {
+    "id": "YDA-30",
+    "question": "Pengaturan threshold atau ambang batas dalam analisis tren peringatan dini (early warning) berfungsi untuk ...",
+    "options": {
+      "A": "Memicu alert atau notifikasi otomatis ketika metrik risiko melewati batas toleransi yang aman",
+      "B": "Menghentikan semua operasi sistem database",
+      "C": "Menyembunyikan data ekstrem (outliers) dari manajemen",
+      "D": "Mempercepat proses komputasi server"
+    },
+    "answer": "A",
+    "explanation": "Threshold digunakan sebagai titik referensi; jika metrik menyentuh atau melampaui batas ini, sistem akan memberi sinyal peringatan.",
+    "category": "dataanalytics"
+  },
+  {
+    "id": "YAUD-1",
+    "question": "Secara sederhana, audit adalah proses untuk...",
+    "options": {
+      "A": "Membuat laporan keuangan perusahaan",
+      "B": "Memeriksa dan mengevaluasi informasi berdasarkan bukti untuk memberikan suatu kesimpulan",
+      "C": "Menggantikan pekerjaan manajemen",
+      "D": "Menentukan strategi pemasaran"
+    },
+    "answer": "B",
+    "explanation": "Audit adalah proses sistematis untuk memperoleh dan mengevaluasi bukti secara objektif mengenai asersi ekonomi.",
+    "category": "audit"
+  },
+  {
+    "id": "YAUD-2",
+    "question": "Tujuan utama audit atas laporan keuangan adalah...",
+    "options": {
+      "A": "Menjamin perusahaan tidak akan bangkrut",
+      "B": "Menemukan semua kecurangan",
+      "C": "Meningkatkan keyakinan pengguna terhadap laporan keuangan melalui opini auditor",
+      "D": "Membuat laporan keuangan perusahaan"
+    },
+    "answer": "C",
+    "explanation": "Tujuan audit adalah memberikan opini yang meningkatkan derajat kepercayaan pengguna laporan keuangan yang dituju.",
+    "category": "audit"
+  },
+  {
+    "id": "YAUD-3",
+    "question": "Pihak yang bertanggung jawab menyusun laporan keuangan adalah...",
+    "options": {
+      "A": "Auditor",
+      "B": "Manajemen perusahaan",
+      "C": "Bank",
+      "D": "Pemerintah"
+    },
+    "answer": "B",
+    "explanation": "Manajemen perusahaan bertanggung jawab penuh atas penyusunan dan penyajian wajar laporan keuangan.",
+    "category": "audit"
+  },
+  {
+    "id": "YAUD-4",
+    "question": "Tanggung jawab utama auditor dalam audit laporan keuangan adalah...",
+    "options": {
+      "A": "Menyusun laporan keuangan",
+      "B": "Memberikan opini berdasarkan audit yang dilakukan",
+      "C": "Menentukan laba perusahaan",
+      "D": "Mengelola kas perusahaan"
+    },
+    "answer": "B",
+    "explanation": "Auditor bertanggung jawab untuk menyatakan suatu opini atas laporan keuangan berdasarkan evaluasi bukti audit yang dikumpulkan.",
+    "category": "audit"
+  },
+  {
+    "id": "YAUD-5",
+    "question": "Auditor harus independen terutama agar...",
+    "options": {
+      "A": "Auditor dapat menggantikan manajemen",
+      "B": "Penilaian auditor tidak dipengaruhi kepentingan pihak yang diaudit",
+      "C": "Audit dapat diselesaikan tanpa bukti",
+      "D": "Auditor dapat menentukan kebijakan perusahaan"
+    },
+    "answer": "B",
+    "explanation": "Independensi memastikan objektivitas, integritas, dan kebebasan auditor dari bias atau konflik kepentingan dalam mengevaluasi bukti.",
+    "category": "audit"
+  },
+  {
+    "id": "YAUD-6",
+    "question": "Sikap auditor yang selalu mempertanyakan dan mengevaluasi bukti secara kritis disebut...",
+    "options": {
+      "A": "Skeptisisme profesional",
+      "B": "Optimisme profesional",
+      "C": "Kerahasiaan administratif",
+      "D": "Manajemen risiko"
+    },
+    "answer": "A",
+    "explanation": "Skeptisisme profesional adalah sikap yang mencakup pikiran yang selalu mempertanyakan dan waspada terhadap kondisi yang mengindikasikan kemungkinan salah saji.",
+    "category": "audit"
+  },
+  {
+    "id": "YAUD-7",
+    "question": "Contoh skeptisisme profesional adalah...",
+    "options": {
+      "A": "Selalu menganggap manajemen melakukan kecurangan",
+      "B": "Menerima semua penjelasan tanpa pemeriksaan",
+      "C": "Mempertimbangkan apakah penjelasan manajemen konsisten dengan bukti yang tersedia",
+      "D": "Menolak seluruh informasi dari perusahaan"
+    },
+    "answer": "C",
+    "explanation": "Skeptisisme tidak berarti menolak semua informasi atau berprasangka buruk, melainkan memvalidasi dan mengevaluasinya secara kritis.",
+    "category": "audit"
+  },
+  {
+    "id": "YAUD-8",
+    "question": "Professional judgment atau pertimbangan profesional dalam audit berarti...",
+    "options": {
+      "A": "Auditor bebas mengambil keputusan tanpa dasar",
+      "B": "Auditor menggunakan pengetahuan, pengalaman, standar, fakta, dan bukti untuk membuat keputusan audit",
+      "C": "Auditor mengikuti keinginan manajemen",
+      "D": "Auditor selalu menggunakan keputusan audit tahun sebelumnya"
+    },
+    "answer": "B",
+    "explanation": "Pertimbangan profesional adalah penerapan pelatihan, pengetahuan, dan pengalaman yang relevan dalam konteks standar audit.",
+    "category": "audit"
+  },
+  {
+    "id": "YAUD-9",
+    "question": "Mengapa audit tidak memberikan jaminan absolut bahwa laporan keuangan bebas dari semua kesalahan?",
+    "options": {
+      "A": "Karena auditor tidak memiliki tanggung jawab",
+      "B": "Karena audit memiliki keterbatasan inheren dan dilakukan untuk memperoleh keyakinan memadai",
+      "C": "Karena auditor tidak menggunakan bukti",
+      "D": "Karena laporan keuangan tidak diperiksa"
+    },
+    "answer": "B",
+    "explanation": "Ada batasan inheren dalam audit seperti penggunaan sampling, estimasi akuntansi, dan sifat bukti audit yang persuasif, bukan konklusif.",
+    "category": "audit"
+  },
+  {
+    "id": "YAUD-10",
+    "question": "Istilah reasonable assurance dalam audit dapat dipahami sebagai...",
+    "options": {
+      "A": "Tidak ada keyakinan",
+      "B": "Keyakinan absolut 100%",
+      "C": "Tingkat keyakinan yang tinggi, tetapi bukan jaminan mutlak",
+      "D": "Keyakinan berdasarkan pendapat manajemen saja"
+    },
+    "answer": "C",
+    "explanation": "Keyakinan memadai (reasonable assurance) adalah tingkat keyakinan yang tinggi namun tidak mencapai absolut 100%.",
+    "category": "audit"
+  },
+  {
+    "id": "YAUD-11",
+    "question": "Risiko audit secara sederhana adalah risiko bahwa...",
+    "options": {
+      "A": "Auditor memberikan opini yang tidak tepat ketika laporan keuangan mengandung salah saji material",
+      "B": "Perusahaan tidak memperoleh laba",
+      "C": "Harga saham turun",
+      "D": "Auditor terlambat datang ke kantor"
+    },
+    "answer": "A",
+    "explanation": "Risiko audit adalah risiko bahwa auditor tanpa disadari tidak memodifikasi opininya secara tepat ketika laporan keuangan mengandung salah saji material.",
+    "category": "audit"
+  },
+  {
+    "id": "YAUD-12",
+    "question": "Materialitas dalam audit berkaitan dengan...",
+    "options": {
+      "A": "Warna laporan keuangan",
+      "B": "Penting atau tidaknya suatu salah saji bagi keputusan pengguna laporan keuangan",
+      "C": "Jumlah auditor dalam tim",
+      "D": "Lamanya perusahaan berdiri"
+    },
+    "answer": "B",
+    "explanation": "Informasi dianggap material jika penghilangan atau salah sajinya secara wajar dapat memengaruhi keputusan ekonomi pengguna laporan keuangan.",
+    "category": "audit"
+  },
+  {
+    "id": "YAUD-13",
+    "question": "Apakah kesalahan dengan nilai kecil selalu tidak material?",
+    "options": {
+      "A": "Ya, selalu",
+      "B": "Tidak, sifat dan keadaan suatu kesalahan juga dapat membuatnya material",
+      "C": "Ya, jika perusahaan besar",
+      "D": "Tidak, karena semua kesalahan pasti material"
+    },
+    "answer": "B",
+    "explanation": "Materialitas dinilai tidak hanya dari besaran angka (kuantitatif) tetapi juga dari sifat transaksinya (kualitatif).",
+    "category": "audit"
+  },
+  {
+    "id": "YAUD-14",
+    "question": "Contoh informasi yang mungkin material karena sifatnya meskipun jumlahnya relatif kecil adalah...",
+    "options": {
+      "A": "Kesalahan penulisan nama biasa",
+      "B": "Transaksi dengan pihak berelasi yang sengaja tidak diungkapkan dan penting bagi pengguna",
+      "C": "Perubahan warna formulir",
+      "D": "Pergantian meja pegawai"
+    },
+    "answer": "B",
+    "explanation": "Transaksi dengan pihak berelasi sangat sensitif dan kualitatif material karena potensial menyembunyikan konflik kepentingan.",
+    "category": "audit"
+  },
+  {
+    "id": "YAUD-15",
+    "question": "Mengapa auditor perlu memahami bisnis klien?",
+    "options": {
+      "A": "Untuk mengambil alih perusahaan",
+      "B": "Untuk memahami transaksi dan risiko yang dapat menyebabkan salah saji material",
+      "C": "Untuk menentukan strategi penjualan perusahaan",
+      "D": "Untuk memilih pegawai perusahaan"
+    },
+    "answer": "B",
+    "explanation": "Pemahaman entitas sangat penting untuk mengidentifikasi dan menilai risiko salah saji material dalam laporan keuangan.",
+    "category": "audit"
+  },
+  {
+    "id": "YAUD-16",
+    "question": "Jika perusahaan memiliki transaksi yang sangat kompleks, auditor pada umumnya akan...",
+    "options": {
+      "A": "Mengabaikannya",
+      "B": "Mempertimbangkan peningkatan risiko dan merancang prosedur audit yang sesuai",
+      "C": "Otomatis memberikan opini tidak wajar",
+      "D": "Meminta transaksi dihapus"
+    },
+    "answer": "B",
+    "explanation": "Transaksi kompleks secara alami meningkatkan risiko inheren, sehingga auditor wajib merancang prosedur lanjutan yang merespons risiko spesifik tersebut.",
+    "category": "audit"
+  },
+  {
+    "id": "YAUD-17",
+    "question": "Risiko salah saji material yang muncul sebelum mempertimbangkan pengendalian terkait dapat berkaitan dengan...",
+    "options": {
+      "A": "Risiko inheren",
+      "B": "Risiko perjalanan",
+      "C": "Risiko pemasaran",
+      "D": "Risiko investasi auditor"
+    },
+    "answer": "A",
+    "explanation": "Risiko inheren adalah kerentanan suatu asersi terhadap salah saji yang material dengan asumsi tidak ada pengendalian internal yang terkait.",
+    "category": "audit"
+  },
+  {
+    "id": "YAUD-18",
+    "question": "Risiko bahwa pengendalian perusahaan tidak mencegah atau mendeteksi dan mengoreksi salah saji secara tepat waktu disebut...",
+    "options": {
+      "A": "Risiko pengendalian",
+      "B": "Risiko pasar",
+      "C": "Risiko kredit auditor",
+      "D": "Risiko investasi"
+    },
+    "answer": "A",
+    "explanation": "Risiko pengendalian (control risk) adalah risiko di mana sistem internal klien gagal menangkal atau menemukan kesalahan.",
+    "category": "audit"
+  },
+  {
+    "id": "YAUD-19",
+    "question": "Risiko bahwa prosedur auditor tidak mendeteksi salah saji material yang ada disebut...",
+    "options": {
+      "A": "Risiko deteksi",
+      "B": "Risiko inheren",
+      "C": "Risiko pengendalian",
+      "D": "Risiko bisnis"
+    },
+    "answer": "A",
+    "explanation": "Risiko deteksi (detection risk) adalah risiko bahwa prosedur audit yang dilaksanakan tidak akan mendeteksi salah saji yang material.",
+    "category": "audit"
+  },
+  {
+    "id": "YAUD-20",
+    "question": "Jika suatu area dinilai memiliki risiko audit yang lebih tinggi, auditor pada umumnya perlu...",
+    "options": {
+      "A": "Mengurangi perhatian terhadap area tersebut",
+      "B": "Merancang respons audit yang lebih kuat sesuai risiko",
+      "C": "Tidak melakukan audit",
+      "D": "Meminta manajemen menentukan hasil audit"
+    },
+    "answer": "B",
+    "explanation": "Berdasarkan pendekatan berbasis risiko (risk-based audit), alokasi waktu dan prosedur harus ditingkatkan pada area dengan profil risiko tinggi.",
+    "category": "audit"
+  },
+  {
+    "id": "YAUD-21",
+    "question": "Bukti audit digunakan auditor terutama untuk...",
+    "options": {
+      "A": "Mendukung kesimpulan dan opini audit",
+      "B": "Menggantikan laporan keuangan",
+      "C": "Menghitung gaji auditor",
+      "D": "Membuat strategi pemasaran"
+    },
+    "answer": "A",
+    "explanation": "Tujuan utama pengumpulan bukti audit adalah sebagai dasar logis dan rasional untuk merumuskan opini kewajaran.",
+    "category": "audit"
+  },
+  {
+    "id": "YAUD-22",
+    "question": "Manakah yang dapat menjadi bukti audit?",
+    "options": {
+      "A": "Faktur dan kontrak",
+      "B": "Konfirmasi pihak luar",
+      "C": "Hasil observasi auditor",
+      "D": "Semua jawaban benar"
+    },
+    "answer": "D",
+    "explanation": "Bukti audit mencakup catatan akuntansi, dokumen eksternal, hasil wawancara, observasi, hingga konfirmasi tertulis.",
+    "category": "audit"
+  },
+  {
+    "id": "YAUD-23",
+    "question": "Bukti yang diperoleh langsung oleh auditor dari pihak eksternal independen pada umumnya...",
+    "options": {
+      "A": "Dapat memiliki keandalan lebih tinggi dibandingkan bukti internal tertentu",
+      "B": "Selalu salah",
+      "C": "Tidak boleh digunakan",
+      "D": "Sama sekali tidak relevan"
+    },
+    "answer": "A",
+    "explanation": "Sesuai standar audit, bukti yang berasal dari sumber eksternal yang independen (misalnya bank) dinilai lebih andal daripada bukti yang dibuat secara internal.",
+    "category": "audit"
+  },
+  {
+    "id": "YAUD-24",
+    "question": "Auditor meminta bank mengonfirmasi saldo rekening perusahaan secara langsung kepada auditor. Prosedur tersebut disebut...",
+    "options": {
+      "A": "Konfirmasi eksternal",
+      "B": "Observasi",
+      "C": "Wawancara kerja",
+      "D": "Perencanaan anggaran"
+    },
+    "answer": "A",
+    "explanation": "Konfirmasi eksternal adalah bukti audit yang diperoleh sebagai respons tertulis langsung kepada auditor dari pihak ketiga.",
+    "category": "audit"
+  },
+  {
+    "id": "YAUD-25",
+    "question": "Auditor menghadiri penghitungan persediaan yang dilakukan perusahaan dan mengamati proses tersebut. Ini merupakan contoh...",
+    "options": {
+      "A": "Observasi",
+      "B": "Konfirmasi bank",
+      "C": "Rekalkulasi bunga",
+      "D": "Analisis pemasaran"
+    },
+    "answer": "A",
+    "explanation": "Observasi terdiri dari tindakan melihat langsung proses atau prosedur yang sedang dilakukan oleh pihak entitas klien.",
+    "category": "audit"
+  },
+  {
+    "id": "YAUD-26",
+    "question": "Auditor menghitung kembali perhitungan penyusutan yang dibuat perusahaan. Prosedur ini disebut...",
+    "options": {
+      "A": "Rekalkulasi",
+      "B": "Konfirmasi eksternal",
+      "C": "Wawancara",
+      "D": "Observasi"
+    },
+    "answer": "A",
+    "explanation": "Penghitungan ulang akurasi matematis oleh auditor secara mandiri dikenal dengan prosedur Rekalkulasi (recalculation).",
+    "category": "audit"
+  },
+  {
+    "id": "YAUD-27",
+    "question": "Auditor membandingkan margin laba tahun ini dengan tahun sebelumnya untuk mencari perubahan yang tidak biasa. Ini merupakan contoh...",
+    "options": {
+      "A": "Prosedur analitis",
+      "B": "Konfirmasi eksternal",
+      "C": "Observasi persediaan",
+      "D": "Pemeriksaan fisik uang"
+    },
+    "answer": "A",
+    "explanation": "Prosedur analitis meliputi evaluasi informasi keuangan melalui analisis hubungan logis antara data keuangan dan non-keuangan.",
+    "category": "audit"
+  },
+  {
+    "id": "YAUD-28",
+    "question": "Pernyataan manajemen kepada auditor...",
+    "options": {
+      "A": "Selalu cukup sebagai satu-satunya bukti",
+      "B": "Tidak perlu dievaluasi",
+      "C": "Dapat menjadi bagian bukti audit, tetapi auditor biasanya perlu mengevaluasinya bersama bukti lain yang relevan",
+      "D": "Tidak pernah boleh digunakan"
+    },
+    "answer": "C",
+    "explanation": "Representasi manajemen (wawancara/pernyataan tertulis) adalah bukti audit, tetapi dengan sendirinya tidak memberikan bukti yang cukup dan tepat tanpa didukung bukti lain.",
+    "category": "audit"
+  },
+  {
+    "id": "YAUD-29",
+    "question": "Kecukupan bukti audit terutama berkaitan dengan...",
+    "options": {
+      "A": "Kuantitas bukti audit",
+      "B": "Warna dokumen",
+      "C": "Nama perusahaan",
+      "D": "Format laporan"
+    },
+    "answer": "A",
+    "explanation": "Kecukupan (sufficiency) mengacu pada ukuran kuantitas bukti audit yang dibutuhkan berdasarkan penilaian risiko.",
+    "category": "audit"
+  },
+  {
+    "id": "YAUD-30",
+    "question": "Ketepatan atau appropriateness bukti audit terutama berkaitan dengan...",
+    "options": {
+      "A": "Relevansi dan keandalan bukti",
+      "B": "Jumlah halaman",
+      "C": "Harga dokumen",
+      "D": "Umur auditor"
+    },
+    "answer": "A",
+    "explanation": "Ketepatan (appropriateness) adalah ukuran kualitas bukti audit, yang mencakup relevansi dan keandalannya.",
+    "category": "audit"
+  },
+  {
+    "id": "YAUD-31",
+    "question": "Pengendalian internal secara sederhana bertujuan membantu organisasi...",
+    "options": {
+      "A": "Mengelola risiko dan mendukung tercapainya tujuan organisasi",
+      "B": "Menghilangkan seluruh risiko secara absolut",
+      "C": "Menggantikan seluruh pegawai",
+      "D": "Menghilangkan kebutuhan manajemen"
+    },
+    "answer": "A",
+    "explanation": "Pengendalian internal dirancang, diimplementasikan, dan dipelihara untuk merespons risiko demi mencapai tujuan operasional, pelaporan, dan kepatuhan.",
+    "category": "audit"
+  },
+  {
+    "id": "YAUD-32",
+    "question": "Contoh pemisahan tugas yang baik adalah...",
+    "options": {
+      "A": "Satu orang membuat vendor, menyetujui pembelian, membayar, dan mencatat transaksi",
+      "B": "Fungsi persetujuan pembayaran dipisahkan dari fungsi pelaksanaan pembayaran sesuai kebutuhan pengendalian",
+      "C": "Semua pegawai memiliki password yang sama",
+      "D": "Semua transaksi dapat dihapus tanpa persetujuan"
+    },
+    "answer": "B",
+    "explanation": "Pemisahan tugas (segregation of duties) mencegah seorang pegawai memiliki kendali penuh atas suatu siklus transaksi mulai dari awal hingga akhir.",
+    "category": "audit"
+  },
+  {
+    "id": "YAUD-33",
+    "question": "Mengapa pemisahan tugas penting?",
+    "options": {
+      "A": "Untuk membuat proses selalu lebih lambat",
+      "B": "Untuk mengurangi risiko kesalahan dan kecurangan yang tidak terdeteksi",
+      "C": "Untuk menambah dokumen",
+      "D": "Untuk menghilangkan kebutuhan audit"
+    },
+    "answer": "B",
+    "explanation": "Pemisahan tugas memastikan adanya cross-check otomatis yang meminimalisir peluang seseorang melakukan dan sekaligus menutupi fraud.",
+    "category": "audit"
+  },
+  {
+    "id": "YAUD-34",
+    "question": "Jika seorang kasir juga mencatat transaksi dan melakukan rekonsiliasi bank tanpa review, auditor mungkin melihat kondisi tersebut sebagai...",
+    "options": {
+      "A": "Potensi kelemahan pengendalian",
+      "B": "Pengendalian yang pasti sempurna",
+      "C": "Bukti bahwa tidak mungkin terjadi kecurangan",
+      "D": "Kondisi yang tidak berkaitan dengan pengendalian"
+    },
+    "answer": "A",
+    "explanation": "Menggabungkan fungsi penyimpanan aset (kasir) dengan pencatatan akuntansi adalah kelemahan fatal (material weakness) dalam pengendalian internal.",
+    "category": "audit"
+  },
+  {
+    "id": "YAUD-35",
+    "question": "Password dan pembatasan hak akses dalam sistem informasi merupakan contoh...",
+    "options": {
+      "A": "Pengendalian akses",
+      "B": "Strategi pemasaran",
+      "C": "Kebijakan penjualan",
+      "D": "Metode penyusutan"
+    },
+    "answer": "A",
+    "explanation": "Pengendalian akses (access control) adalah komponen krusial dari IT General Controls (ITGC) untuk mengamankan data.",
+    "category": "audit"
+  },
+  {
+    "id": "YAUD-36",
+    "question": "Approval oleh pejabat yang berwenang sebelum pembayaran dilakukan merupakan contoh...",
+    "options": {
+      "A": "Otorisasi",
+      "B": "Konfirmasi eksternal",
+      "C": "Perhitungan fisik",
+      "D": "Prosedur analitis"
+    },
+    "answer": "A",
+    "explanation": "Otorisasi memastikan hanya transaksi yang sah dan diizinkan manajemen yang diproses oleh perusahaan.",
+    "category": "audit"
+  },
+  {
+    "id": "YAUD-37",
+    "question": "Apakah pengendalian internal yang baik dapat menjamin tidak pernah terjadi kesalahan atau kecurangan?",
+    "options": {
+      "A": "Ya, 100%",
+      "B": "Tidak, pengendalian internal memiliki keterbatasan",
+      "C": "Ya, jika menggunakan komputer",
+      "D": "Ya, jika perusahaan besar"
+    },
+    "answer": "B",
+    "explanation": "Sebaik apa pun desainnya, pengendalian internal hanya dapat memberikan keyakinan memadai (bukan mutlak) karena adanya keterbatasan bawaan seperti kolusi dan kesalahan manusia.",
+    "category": "audit"
+  },
+  {
+    "id": "YAUD-38",
+    "question": "Salah satu keterbatasan pengendalian internal adalah kemungkinan...",
+    "options": {
+      "A": "Kolusi antarpegawai",
+      "B": "Semua transaksi pasti benar",
+      "C": "Seluruh pelanggan membayar tepat waktu",
+      "D": "Tidak adanya manusia dalam organisasi"
+    },
+    "answer": "A",
+    "explanation": "Kolusi melibatkan kerja sama dua pihak atau lebih untuk mengelabui kontrol yang sudah didesain (seperti pemisahan tugas).",
+    "category": "audit"
+  },
+  {
+    "id": "YAUD-39",
+    "question": "Management override of controls berarti...",
+    "options": {
+      "A": "Manajemen menggunakan kewenangannya untuk mengabaikan atau mengesampingkan pengendalian yang seharusnya berlaku",
+      "B": "Auditor mengganti sistem perusahaan",
+      "C": "Pegawai mengambil cuti",
+      "D": "Perusahaan mengganti komputer"
+    },
+    "answer": "A",
+    "explanation": "Pengabaian pengendalian oleh manajemen adalah risiko kecurangan di mana manajemen menyalahgunakan posisinya untuk melanggar aturan yang telah mereka buat sendiri.",
+    "category": "audit"
+  },
+  {
+    "id": "YAUD-40",
+    "question": "Mengapa auditor perlu memahami pengendalian internal?",
+    "options": {
+      "A": "Untuk membantu mengidentifikasi dan menilai risiko serta merancang prosedur audit yang sesuai",
+      "B": "Untuk menjadi direktur perusahaan",
+      "C": "Untuk menggantikan internal auditor",
+      "D": "Untuk menyusun seluruh SOP perusahaan"
+    },
+    "answer": "A",
+    "explanation": "Pemahaman PI sangat krusial bagi auditor eksternal untuk menentukan seberapa luas pengujian substantif yang perlu dilakukan.",
+    "category": "audit"
+  },
+  {
+    "id": "YAUD-41",
+    "question": "Perbedaan penting antara error dan fraud adalah...",
+    "options": {
+      "A": "Tidak ada perbedaan",
+      "B": "Fraud melibatkan unsur kesengajaan, sedangkan error pada dasarnya tidak disengaja",
+      "C": "Error selalu lebih besar daripada fraud",
+      "D": "Fraud hanya dapat dilakukan manajemen"
+    },
+    "answer": "B",
+    "explanation": "Faktor utama yang membedakan kecurangan (fraud) dengan kesalahan (error) adalah 'niat' (intent).",
+    "category": "audit"
+  },
+  {
+    "id": "YAUD-42",
+    "question": "Apakah tujuan utama audit laporan keuangan adalah menemukan setiap bentuk fraud?",
+    "options": {
+      "A": "Ya, auditor menjamin semua fraud ditemukan",
+      "B": "Tidak; auditor merancang audit untuk memperoleh keyakinan memadai bahwa laporan keuangan bebas dari salah saji material, baik karena fraud maupun error",
+      "C": "Tidak, fraud sama sekali bukan bagian pertimbangan auditor",
+      "D": "Ya, tetapi hanya fraud bernilai kecil"
+    },
+    "answer": "B",
+    "explanation": "Auditor bukan detektif fraud; tugas utamanya adalah memberikan opini tingkat keyakinan memadai, bukan memberikan jaminan absolut nihilnya fraud.",
+    "category": "audit"
+  },
+  {
+    "id": "YAUD-43",
+    "question": "Auditor menemukan dokumen yang tampaknya sengaja dimanipulasi. Sikap yang tepat adalah...",
+    "options": {
+      "A": "Mengabaikannya",
+      "B": "Meningkatkan skeptisisme dan melakukan prosedur lebih lanjut sesuai keadaan",
+      "C": "Langsung menyatakan seluruh manajemen bersalah",
+      "D": "Menghapus dokumen tersebut"
+    },
+    "answer": "B",
+    "explanation": "Saat menemukan indikasi fraud, auditor wajib merespons dengan meningkatkan skeptisisme profesional dan memperdalam investigasi dokumen terkait.",
+    "category": "audit"
+  },
+  {
+    "id": "YAUD-44",
+    "question": "Audit sampling berarti...",
+    "options": {
+      "A": "Auditor selalu memeriksa 100% transaksi",
+      "B": "Auditor menerapkan prosedur audit terhadap kurang dari 100% item dalam populasi yang relevan sehingga auditor memiliki dasar untuk menarik kesimpulan mengenai populasi",
+      "C": "Auditor memilih dokumen yang paling mudah saja",
+      "D": "Auditor tidak memerlukan bukti"
+    },
+    "answer": "B",
+    "explanation": "Sampling memungkinkan auditor mengambil simpulan mengenai seluruh populasi hanya dengan menguji sampel representatif, sehingga audit efisien.",
+    "category": "audit"
+  },
+  {
+    "id": "YAUD-45",
+    "question": "Mengapa auditor dapat menggunakan sampling?",
+    "options": {
+      "A": "Karena dalam kondisi tertentu auditor dapat memperoleh bukti yang memadai tanpa harus memeriksa seluruh populasi",
+      "B": "Karena auditor boleh menebak hasil audit",
+      "C": "Karena transaksi yang tidak dipilih pasti benar",
+      "D": "Karena auditor tidak bertanggung jawab terhadap kesimpulannya"
+    },
+    "answer": "A",
+    "explanation": "Memeriksa 100% data transaksi keuangan seringkali sangat tidak cost-effective dan tidak praktis untuk dilakukan.",
+    "category": "audit"
+  },
+  {
+    "id": "YAUD-46",
+    "question": "Jika auditor menyimpulkan laporan keuangan disajikan secara wajar, dalam semua hal yang material, sesuai kerangka pelaporan yang berlaku, auditor pada umumnya memberikan...",
+    "options": {
+      "A": "Opini tanpa modifikasian",
+      "B": "Opini tidak wajar",
+      "C": "Opini menolak perusahaan",
+      "D": "Sertifikat bebas fraud"
+    },
+    "answer": "A",
+    "explanation": "Opini tanpa modifikasian (unqualified/unmodified opinion) atau Wajar Tanpa Pengecualian adalah opini standar saat LK bersih dari salah saji material.",
+    "category": "audit"
+  },
+  {
+    "id": "YAUD-47",
+    "question": "Apakah opini tanpa modifikasian berarti perusahaan pasti sehat dan tidak akan bangkrut?",
+    "options": {
+      "A": "Ya",
+      "B": "Tidak",
+      "C": "Ya, selama satu tahun",
+      "D": "Ya, jika perusahaan memperoleh laba"
+    },
+    "answer": "B",
+    "explanation": "Opini audit hanyalah pernyataan mengenai kewajaran penyajian informasi historis, bukan jaminan kesehatan bisnis atau kelangsungan hidup absolut.",
+    "category": "audit"
+  },
+  {
+    "id": "YAUD-48",
+    "question": "Jika terdapat salah saji material tetapi tidak pervasif dan manajemen tidak melakukan koreksi yang diperlukan, auditor dapat mempertimbangkan...",
+    "options": {
+      "A": "Opini wajar dengan pengecualian",
+      "B": "Selalu opini tanpa modifikasian",
+      "C": "Tidak membuat laporan audit",
+      "D": "Sertifikat keuntungan"
+    },
+    "answer": "A",
+    "explanation": "Opini Wajar Dengan Pengecualian (Qualified Opinion) diberikan saat ada salah saji material, namun tidak merusak Laporan Keuangan secara merata (tidak pervasif).",
+    "category": "audit"
+  },
+  {
+    "id": "YAUD-49",
+    "question": "Jika salah saji bersifat material dan pervasif terhadap laporan keuangan, auditor dapat memberikan...",
+    "options": {
+      "A": "Opini tidak wajar",
+      "B": "Opini tanpa modifikasian",
+      "C": "Surat rekomendasi investasi",
+      "D": "Jaminan bahwa perusahaan akan bangkrut"
+    },
+    "answer": "A",
+    "explanation": "Opini Tidak Wajar (Adverse Opinion) menyatakan bahwa laporan keuangan secara keseluruhan disajikan secara salah atau menyesatkan.",
+    "category": "audit"
+  },
+  {
+    "id": "YAUD-50",
+    "question": "Pernyataan yang paling tepat mengenai auditor adalah...",
+    "options": {
+      "A": "Auditor bertugas menjamin seluruh transaksi perusahaan benar 100%",
+      "B": "Auditor menggantikan tanggung jawab manajemen",
+      "C": "Auditor mengumpulkan dan mengevaluasi bukti secara profesional untuk membentuk kesimpulan dan memberikan opini sesuai tujuan audit",
+      "D": "Auditor hanya mencari kesalahan pegawai"
+    },
+    "answer": "C",
+    "explanation": "Inilah ringkasan fundamental dari peran profesi auditor eksternal independen di dunia bisnis.",
+    "category": "audit"
+  },
+  {
+    "id": "YAKT-1",
+    "question": "Persamaan dasar akuntansi menyatakan bahwa aset sama dengan liabilitas ditambah dengan...",
+    "options": {
+      "A": "Pendapatan",
+      "B": "Ekuitas",
+      "C": "Beban",
+      "D": "Laba Bersih"
+    },
+    "answer": "B",
+    "explanation": "Persamaan dasar akuntansi wajib menyeimbangkan sisi Aset dengan Liabilitas ditambah Ekuitas.",
+    "category": "akuntansi"
+  },
+  {
+    "id": "YAKT-2",
+    "question": "Sistem pencatatan akuntansi yang memungkinkan adanya mekanisme pengecekan terhadap keakuratan nilai sisi debit dan kredit disebut dengan ...",
+    "options": {
+      "A": "Buku Besar",
+      "B": "Basis Kas",
+      "C": "Basis Akrual",
+      "D": "Double Entry"
+    },
+    "answer": "D",
+    "explanation": "Double entry (sistem pencatatan ganda) adalah konsep yang memastikan bahwa nilai sisi debit harus selalu sama dengan kredit.",
+    "category": "akuntansi"
+  },
+  {
+    "id": "YAKT-3",
+    "question": "Berikut merupakan pos laporan keuangan, kecuali ...",
+    "options": {
+      "A": "Laba",
+      "B": "Penghasilan",
+      "C": "Beban",
+      "D": "Aset"
+    },
+    "answer": "A",
+    "explanation": "Laba bukan merupakan pos (elemen dasar) laporan keuangan (seperti Aset, Liabilitas, Ekuitas, Pendapatan, Beban), melainkan nilai selisih murni.",
+    "category": "akuntansi"
+  },
+  {
+    "id": "YAKT-4",
+    "question": "Berikut merupakan pos laporan keuangan yang akan bertambah pada posisi kredit, kecuali ...",
+    "options": {
+      "A": "Liabilitas",
+      "B": "Penghasilan",
+      "C": "Beban",
+      "D": "Ekuitas"
+    },
+    "answer": "C",
+    "explanation": "Beban memiliki saldo normal debit, sehingga ia bertambah di posisi debit (bukan kredit).",
+    "category": "akuntansi"
+  },
+  {
+    "id": "YAKT-5",
+    "question": "Berikut merupakan pernyataan yang paling tepat tentang aset, kecuali ...",
+    "options": {
+      "A": "Aset bertambah ketika ekuitas bertambah",
+      "B": "Aset bertambah ketika utang bertambah",
+      "C": "Aset bertambah ketika beban bertambah",
+      "D": "Aset bertambah ketika penghasilan bertambah"
+    },
+    "answer": "C",
+    "explanation": "Beban bertambah justru akan menurunkan ekuitas/aset pada akhirnya (laba turun), sehingga pernyataan 'aset bertambah ketika beban bertambah' adalah salah.",
+    "category": "akuntansi"
+  },
+  {
+    "id": "YAKT-6",
+    "question": "Berikut merupakan pos laporan keuangan yang akan bertambah pada posisi debit ...",
+    "options": {
+      "A": "Aset",
+      "B": "Ekuitas",
+      "C": "Beban",
+      "D": "Penghasilan"
+    },
+    "answer": "A",
+    "explanation": "Aset memiliki saldo normal debit, sehingga bertambah di sisi debit.",
+    "category": "akuntansi"
+  },
+  {
+    "id": "YAKT-7",
+    "question": "Berikut merupakan tahapan dalam siklus akuntansi dimana akuntan Perusahaan hampir tidak memiliki andil sama sekali ...",
+    "options": {
+      "A": "Jurnal",
+      "B": "Buku besar",
+      "C": "Neraca saldo",
+      "D": "Bukti transaksi"
+    },
+    "answer": "D",
+    "explanation": "Bukti transaksi biasanya diterbitkan oleh sistem atau pihak ketiga, akuntan umumnya menerima jadi untuk dicatat.",
+    "category": "akuntansi"
+  },
+  {
+    "id": "YAKT-8",
+    "question": "Pencatatan bukti transaksi yang memadai dilakukan akuntan dalam ...",
+    "options": {
+      "A": "Analisis transaksi",
+      "B": "Jurnal",
+      "C": "Buku besar",
+      "D": "Neraca saldo"
+    },
+    "answer": "B",
+    "explanation": "Jurnal adalah tempat pertama kali pencatatan (recording) bukti transaksi secara formal, kronologis, dan sistematis dilakukan (book of original entry).",
+    "category": "akuntansi"
+  },
+  {
+    "id": "YAKT-9",
+    "question": "Berikut yang termasuk transaksi jurnal penyesuaian ...",
+    "options": {
+      "A": "Pembelian persediaan secara tunai maupun kredit",
+      "B": "Pengakuan pendapatan sewa atas pendapatan diterima dimuka",
+      "C": "Penerimaan utang bank jangka panjang",
+      "D": "Penjualan barang secara tunai maupun kredit"
+    },
+    "answer": "B",
+    "explanation": "Pendapatan sewa diterima dimuka belum menjadi pendapatan riil sepenuhnya sebelum manfaatnya berjalan, sehingga butuh disesuaikan.",
+    "category": "akuntansi"
+  },
+  {
+    "id": "YAKT-10",
+    "question": "Berikut adalah salah satu kemungkinan transaksi yang menyebabkan liabilitas bertambah kecuali ...",
+    "options": {
+      "A": "Beban gaji yang belum dibayar",
+      "B": "Kas bertambah karena utang bank",
+      "C": "Pembelian persediaan secara kredit",
+      "D": "Pengakuan beban sewa atas biaya dibayar dimuka"
+    },
+    "answer": "D",
+    "explanation": "Biaya dibayar dimuka (Prepaid Expense) adalah ASET. Pengakuan beban atas akun ini akan mengurangi aset tersebut, BUKAN menambah liabilitas. [HATI-HATI! SOAL TRICKY: Istilah 'biaya' sering diasumsikan sebagai kewajiban (liabilitas) atau beban langsung. Padahal, biaya dibayar dimuka (seperti sewa dibayar dimuka) adalah Aset. Ketika diakui sebagai beban, maka aset-nya yang berkurang, bukan liabilitas-nya yang bertambah.]",
+    "category": "akuntansi"
+  },
+  {
+    "id": "YAKT-11",
+    "question": "Apabila Perusahaan melakukan penjualan barang senilai Rp 500 juta, tetapi uang yang diterima hanya sebesar Rp 400 juta, maka pernyataan dibawah yang paling tepat terkait transaksi ini adalah ...",
+    "options": {
+      "A": "Perusahaan mencatat sisanya sebagai piutang usaha",
+      "B": "Sisa penjualan sebesar Rp 100 juta tidak jadi dilakukan oleh Perusahaan",
+      "C": "Perusahaan mengembalikan uang sebesar Rp 400 juta yang diterima dari pelanggan",
+      "D": "Penjualan sebenarnya hanya sebesar Rp 400 juta"
+    },
+    "answer": "A",
+    "explanation": "Sisa kekurangan bayar sebesar Rp 100 juta diakui sebagai hak tagih atau Piutang Usaha.",
+    "category": "akuntansi"
+  },
+  {
+    "id": "YAKT-12",
+    "question": "Berikut adalah transaksi yang akan diikuti oleh penyesuaian (jurnal penyesuaian) di akhir periode, kecuali ...",
+    "options": {
+      "A": "Pembelian aset tetap kendaraan",
+      "B": "Pendapatan diterima dimuka atas sewa",
+      "C": "Pembelian aset tetap tanah",
+      "D": "Biaya dibayar dimuka atas sewa"
+    },
+    "answer": "C",
+    "explanation": "Pembelian tanah tidak memunculkan kebutuhan jurnal penyesuaian khusus di akhir periode karena tanah umumnya tidak disusutkan.",
+    "category": "akuntansi"
+  },
+  {
+    "id": "YAKT-13",
+    "question": "Apabila Perusahaan melakukan pembelian barang senilai Rp 300 juta, tetapi uang yang dibayarkan hanya sebesar Rp 200 juta, maka pernyataan dibawah yang paling tepat terkait transaksi ini adalah ...",
+    "options": {
+      "A": "Sisa pembelian sebesar Rp 100 juta tidak jadi dilakukan oleh Perusahaan",
+      "B": "Pembelian sebenarnya hanya sebesar Rp 200 juta",
+      "C": "Perusahaan menerima pengembalian uang sebesar Rp 200 juta dari supplier",
+      "D": "Perusahaan mencatat sisanya sebagai utang usaha"
+    },
+    "answer": "D",
+    "explanation": "Sisa Rp 100 juta yang belum dibayarkan perusahaan ke supplier akan menjadi Utang Usaha.",
+    "category": "akuntansi"
+  },
+  {
+    "id": "YAKT-14",
+    "question": "Perusahaan membayarkan gaji pegawai sebesar Rp 150 juta pada tanggal 25 setiap bulannya, tetapi pada 25 Januari Perusahaan kesulitan keuangan dan belum bisa membayarkan gaji pegawai pada bulan tersebut. Bagaimana akuntan mencatat transaksi ini ...",
+    "options": {
+      "A": "Mencatat beban gaji (debit) dan kas (kredit)",
+      "B": "Mencatat akrual/utang beban (debit) dan beban gaji (kredit)",
+      "C": "Mencatat beban gaji (debit) dan akrual/utang beban (kredit)",
+      "D": "Tidak mencatat apapun"
+    },
+    "answer": "C",
+    "explanation": "Secara akrual, karena bulan Januari gaji sudah jadi hak pegawai tapi belum dibayar, diakui sebagai Beban (debit) dan Utang Gaji (kredit).",
+    "category": "akuntansi"
+  },
+  {
+    "id": "YAKT-15",
+    "question": "Perusahaan menerima tagihan listrik sebesar Rp 5 juta untuk bulan Desember 2025, pada 15 Januari 2026. Bagaimana akuntan mencatat transaksi ini ...",
+    "options": {
+      "A": "Beban listrik (debit) dan kas (kredit) dan tanggal jurnal di 15 Januari 2026",
+      "B": "Beban listrik (debit) dan akrual/utang beban (kredit) dan tanggal jurnal di \"backdate\" menjadi 31 Desember 2025",
+      "C": "Beban listrik (debit) dan akrual/utang beban (kredit) dan tanggal jurnal di 15 Januari 2026",
+      "D": "Tidak mencatat apapun"
+    },
+    "answer": "B",
+    "explanation": "Berdasarkan asas akrual, tagihan pemakaian Desember tetap diakui sebagai beban di periode berjalan (Desember) melalui backdate jurnal, lalu dilunasi Januari.",
+    "category": "akuntansi"
+  },
+  {
+    "id": "YAKT-16",
+    "question": "Berikut adalah beban dalam akuntansi yang tidak mengeluarkan kas ....",
+    "options": {
+      "A": "Beban penyusutan",
+      "B": "Beban gaji",
+      "C": "Beban listrik",
+      "D": "Tidak ada yang benar, semua beban mengeluarkan kas"
+    },
+    "answer": "A",
+    "explanation": "Beban penyusutan adalah jurnal alokasi nilai buku aset yang sama sekali tidak membutuhkan pengeluaran arus kas di saat itu. [HATI-HATI! SOAL TRICKY: Terkadang kita otomatis mengaitkan kata 'beban' dengan uang kas yang keluar. Namun, harus diingat bahwa Beban Penyusutan adalah sebuah entri akuntansi untuk alokasi nilai, yang sama sekali tidak melibatkan arus kas pengeluaran di periode berjalan.]",
+    "category": "akuntansi"
+  },
+  {
+    "id": "YAKT-17",
+    "question": "Perusahaan menerima uang sewa sebesar Rp 120 juta pada 1 Januari 2025, untuk masa selama tahun 2025. Bagaimana akuntan mencatat transaksi ini ...",
+    "options": {
+      "A": "Kas (debit) dan pendapatan sewa (kredit)",
+      "B": "Pendapatan diterima dimuka (debit) dan pendapatan sewa (kredit) sebesar Rp 10 juta",
+      "C": "Piutang sewa (debit) dan pendapatan sewa (kredit)",
+      "D": "Kas (debit) dan pendapatan diterima dimuka (kredit)"
+    },
+    "answer": "D",
+    "explanation": "Penerimaan tunai (Kas di debit) atas sewa setahun penuh melahirkan kewajiban menyerahkan aset/jasa (Pendapatan diterima dimuka di kredit).",
+    "category": "akuntansi"
+  },
+  {
+    "id": "YAKT-18",
+    "question": "Berikut adalah penyajian akun uang muka pembelian dalam laporan keuangan yang paling tepat ...",
+    "options": {
+      "A": "Liabilitas jangka pendek di laporan posisi keuangan",
+      "B": "Aset lancar di laporan posisi keuangan",
+      "C": "Beban pokok penjualan di laporan laba rugi",
+      "D": "Tidak ada jawaban yang benar"
+    },
+    "answer": "B",
+    "explanation": "Uang muka pembelian memberi hak masa depan atas barang, sehingga masuk klasifikasi Aset Lancar.",
+    "category": "akuntansi"
+  },
+  {
+    "id": "YAKT-19",
+    "question": "Berikut adalah penyajian akun uang muka penjualan dalam laporan keuangan yang paling tepat ...",
+    "options": {
+      "A": "Liabilitas jangka pendek di laporan posisi keuangan",
+      "B": "Aset lancar di laporan posisi keuangan",
+      "C": "Penjualan di laporan laba rugi",
+      "D": "Tidak ada jawaban yang benar"
+    },
+    "answer": "A",
+    "explanation": "Uang muka penjualan melahirkan utang performa (menyerahkan barang/jasa ke pelanggan), sehingga diklasifikasikan sebagai Liabilitas Jangka Pendek.",
+    "category": "akuntansi"
+  },
+  {
+    "id": "YAKT-20",
+    "question": "Berikut adalah pos laporan keuangan yang termasuk kategori beban, kecuali ...",
+    "options": {
+      "A": "Beban listrik",
+      "B": "Beban gaji",
+      "C": "Beban pokok penjualan",
+      "D": "Biaya dibayar dimuka"
+    },
+    "answer": "D",
+    "explanation": "Biaya dibayar dimuka adalah akun Aset karena perusahaaan masih memiliki sisa manfaat ekonomi di masa mendatang.",
+    "category": "akuntansi"
+  },
+  {
+    "id": "YAKT-21",
+    "question": "Berikut adalah jurnal yang kemungkinan besar ada dalam pencatatan transaksi akuntansi, kecuali ...",
+    "options": {
+      "A": "Beban gaji (debit) dan kas (kredit)",
+      "B": "Utang usaha (debit) dan kas (kredit)",
+      "C": "Piutang usaha (debit) dan penjualan (kredit)",
+      "D": "Piutang usaha (debit) dan utang usaha (kredit)"
+    },
+    "answer": "D",
+    "explanation": "Secara normal, mencatat piutang dan utang usaha secara bersamaan mendebit-kredit tanpa pos kas/pendapatan adalah transaksi yang tidak logis.",
+    "category": "akuntansi"
+  },
+  {
+    "id": "YAKT-22",
+    "question": "Berikut adalah pos laporan keuangan yang termasuk kategori penghasilan, kecuali ...",
+    "options": {
+      "A": "Pendapatan diterima dimuka",
+      "B": "Pendapatan dividen",
+      "C": "Pendapatan bunga",
+      "D": "Keuntungan selisih kurs"
+    },
+    "answer": "A",
+    "explanation": "Pendapatan diterima dimuka diakui sebagai liabilitas (utang layanan) hingga kewajiban diselesaikan.",
+    "category": "akuntansi"
+  },
+  {
+    "id": "YAKT-23",
+    "question": "Proses posting dilakukan dengan cara ....",
+    "options": {
+      "A": "Memindahkan setiap angka transaksi pos laporan keuangan dalam neraca saldo ke laporan keuangan",
+      "B": "Memindahkan setiap angka transaksi pos laporan keuangan dalam jurnal ke buku besar masing-masing pos laporan keuangan",
+      "C": "Memindahkan setiap angka transaksi pos laporan keuangan dalam buku besar ke neraca saldo masing-masing pos laporan keuangan",
+      "D": "Memindahkan setiap angka transaksi pos laporan keuangan dalam buku besar ke jurnal masing-masing pos laporan keuangan"
+    },
+    "answer": "B",
+    "explanation": "Proses posting adalah aktivitas memindahkan nominal entri dari jurnal kronologis ke masing-masing buku besar akun.",
+    "category": "akuntansi"
+  },
+  {
+    "id": "YAKT-24",
+    "question": "Berikut adalah tahapan dalam siklus akuntansi dimana akuntan bisa melihat seluruh saldo akhir (hanya saldo akhir) dari semua pos laporan keuangan ...",
+    "options": {
+      "A": "Jurnal",
+      "B": "Buku besar",
+      "C": "Neraca saldo",
+      "D": "Laporan keuangan"
+    },
+    "answer": "C",
+    "explanation": "Neraca saldo (Trial Balance) adalah daftar ringkasan tempat berkumpulnya seluruh saldo akhir tiap-tiap akun.",
+    "category": "akuntansi"
+  },
+  {
+    "id": "YAKT-25",
+    "question": "Sesuai dengan prosedur penyusunan laporan keuangan dalam siklus akuntansi, laporan keuangan yang harus pertama kali disusun adalah ...",
+    "options": {
+      "A": "Laporan laba rugi dan penghasilan komprehensif lain",
+      "B": "Laporan perubahan ekuitas",
+      "C": "Laporan posisi keuangan",
+      "D": "Laporan arus kas"
+    },
+    "answer": "A",
+    "explanation": "Laporan Laba Rugi disusun paling awal untuk mengetahui Laba Bersih yang nanti angkanya dimasukkan ke Laporan Perubahan Ekuitas.",
+    "category": "akuntansi"
+  },
+  {
+    "id": "YAKT-26",
+    "question": "Jenis laporan keuangan yang tidak hanya menyajikan angka, tetapi juga informasi lain seperti legalitas, jenis usaha, kebijakan akuntansi dan informasi relevan lainnya adalah ...",
+    "options": {
+      "A": "Laporan laba rugi dan penghasilan komprehensif lain",
+      "B": "Laporan perubahan ekuitas",
+      "C": "Laporan posisi keuangan",
+      "D": "Catatan atas laporan keuangan"
+    },
+    "answer": "D",
+    "explanation": "Catatan Atas Laporan Keuangan merinci metode, legalitas, serta penjabaran tekstual non-numerik yang komprehensif.",
+    "category": "akuntansi"
+  },
+  {
+    "id": "YAKT-27",
+    "question": "Berikut adalah transaksi yang bisa mempengaruhi laba (rugi) Perusahaan ...",
+    "options": {
+      "A": "Penerimaan piutang",
+      "B": "Pembayaran beban",
+      "C": "Pembagian dividen",
+      "D": "Penerimaan setoran modal"
+    },
+    "answer": "B",
+    "explanation": "Melakukan pembayaran/pengakuan beban secara langsung menjadi komponen pengurang Laba (Rugi).",
+    "category": "akuntansi"
+  },
+  {
+    "id": "YAKT-28",
+    "question": "Berikut penyajian laba dalam laporan laba rugi dan penghasilan komprehensif lain, kecuali ...",
+    "options": {
+      "A": "Laba sebelum pajak",
+      "B": "Laba bersih",
+      "C": "Laba bruto",
+      "D": "Laba sebelum penyusutan, amortisasi, bunga dan pajak"
+    },
+    "answer": "D",
+    "explanation": "EBITDA (Laba sebelum bunga, pajak, penyusutan) adalah metrik manajemen, bukan line item wajib standar penyajian komprehensif.",
+    "category": "akuntansi"
+  },
+  {
+    "id": "YAKT-29",
+    "question": "Jika sebuah Perusahaan dagang yang aktivitas utama nya adalah melakukan penjualan dan pembelian barang dagangan, memperoleh pendapatan sewa, maka penyajian pos ini di laporan laba rugi yang paling tepat adalah ...",
+    "options": {
+      "A": "Digabung dengan penjualan barang",
+      "B": "Pendapatan lain-lain",
+      "C": "Beban lain-lain",
+      "D": "Pendapatan keuangan/bunga"
+    },
+    "answer": "B",
+    "explanation": "Bagi perusahaan dagang, kegiatan menyewakan bukanlah core business utama, jadi disajikan sebagai Pendapatan lain-lain.",
+    "category": "akuntansi"
+  },
+  {
+    "id": "YAKT-30",
+    "question": "Berikut adalah transaksi, kejadian, atau peristiwa yang akan menambah ekuitas di laporan perubahan ekuitas ...",
+    "options": {
+      "A": "Pembelian aset tetap",
+      "B": "Kerugian Perusahaan",
+      "C": "Pembagian dividen",
+      "D": "Setoran modal"
+    },
+    "answer": "D",
+    "explanation": "Setoran modal secara kas/non-kas langsung akan memperbesar komponen saldo Ekuitas.",
+    "category": "akuntansi"
+  },
+  {
+    "id": "YAKT-31",
+    "question": "Berikut adalah transaksi, kejadian, atau peristiwa yang akan tercatat di laporan perubahan ekuitas ...",
+    "options": {
+      "A": "Pelunasan utang",
+      "B": "Pembayaran beban",
+      "C": "Pembagian dividen",
+      "D": "Perolehan laba"
+    },
+    "answer": "C",
+    "explanation": "Pembagian dividen mengembalikan kekayaan ke pemegang saham, sehingga mendebit/mengurangi Ekuitas (Saldo Laba).",
+    "category": "akuntansi"
+  },
+  {
+    "id": "YAKT-32",
+    "question": "Berikut adalah transaksi, kejadian, atau peristiwa yang akan menambah saldo laba di laporan perubahan ekuitas ...",
+    "options": {
+      "A": "Perolehan laba",
+      "B": "Kerugian perusahaan",
+      "C": "Pembagian dividen",
+      "D": "Pembayaran beban"
+    },
+    "answer": "A",
+    "explanation": "Posisi Laba berjalan otomatis ditarik sebagai penambah komponen Saldo Laba (Retained Earnings) di permodalan.",
+    "category": "akuntansi"
+  },
+  {
+    "id": "YAKT-33",
+    "question": "Berikut adalah kejadian, peristiwa, atau transaksi yang bisa membuat aset Perusahaan naik ...",
+    "options": {
+      "A": "Pelunasan utang usaha",
+      "B": "Pembayaran beban gaji",
+      "C": "Pembagian dividen",
+      "D": "Penerimaan utang bank"
+    },
+    "answer": "D",
+    "explanation": "Menerima kucuran kredit (utang bank) berarti perusahaan menerima dana Kas (Aset naik).",
+    "category": "akuntansi"
+  },
+  {
+    "id": "YAKT-34",
+    "question": "Berikut adalah penyajian aset dalam laporan posisi keuangan dalam best practice nya di Indonesia ...",
+    "options": {
+      "A": "Aset lancar dan aset tidak lancar",
+      "B": "Aset jangka pendek dan aset jangka panjang",
+      "C": "Aset saja untuk semua industri",
+      "D": "Tidak ada jawaban yang benar"
+    },
+    "answer": "A",
+    "explanation": "Klasifikasi standar laporan aset di Indonesia mensyaratkan pemisahan Aset Lancar (likuid) dan Aset Tidak Lancar.",
+    "category": "akuntansi"
+  },
+  {
+    "id": "YAKT-35",
+    "question": "Berikut adalah penyajian liabilitas dalam laporan posisi keuangan dalam best practice nya di Indonesia ...",
+    "options": {
+      "A": "Liabilitas lancar dan liabilitas tidak lancar",
+      "B": "Liabilitas jangka pendek dan liabilitas jangka panjang",
+      "C": "Liabilitas saja untuk semua industri",
+      "D": "Tidak ada jawaban yang benar"
+    },
+    "answer": "A",
+    "explanation": "Sama dengan aset, liabilitas juga harus diklasifikasi likuiditas pelunasannya: Jangka Pendek (lancar) dan Jangka Panjang.",
+    "category": "akuntansi"
+  },
+  {
+    "id": "YAKT-36",
+    "question": "Berikut adalah transaksi yang akan masuk ke laporan arus kas aktivitas operasi, kecuali ...",
+    "options": {
+      "A": "Pembayaran gaji secara tunai",
+      "B": "Pembelian barang secara tunai",
+      "C": "Penjualan barang dagang secara kredit",
+      "D": "Penjualan barang secara tunai"
+    },
+    "answer": "C",
+    "explanation": "Penjualan kredit hanya menambah aset berupa piutang, sama sekali tidak ada arus uang (kas) riil yang berputar.",
+    "category": "akuntansi"
+  },
+  {
+    "id": "YAKT-37",
+    "question": "Jika terdapat setoran modal saham oleh pemegang saham secara tunai, maka transaksi ini akan tercatat di laporan arus kas dari aktivitas ...",
+    "options": {
+      "A": "Operasional",
+      "B": "Pendanaan",
+      "C": "Investasi",
+      "D": "Tidak tercatat di laporan arus kas"
+    },
+    "answer": "B",
+    "explanation": "Transaksi permodalan atau interaksi dengan ekuitas pemilik (setoran/tarikan) masuk dalam klasifikasi aktivitas Pendanaan.",
+    "category": "akuntansi"
+  },
+  {
+    "id": "YAKT-38",
+    "question": "Saldo akhir tahun kas dalam laporan arus kas harus sama dengan ...",
+    "options": {
+      "A": "Kas dalam aktivitas investasi",
+      "B": "Kas dalam aktivitas operasi",
+      "C": "Kas dalam laporan posisi keuangan awal tahun",
+      "D": "Kas dalam laporan posisi keuangan akhir tahun"
+    },
+    "answer": "D",
+    "explanation": "Pada hakikatnya rekonsiliasi kas memastikan nilai akhir buku kas di arus kas klop dengan nilai kas di Posisi Keuangan akhir tahun.",
+    "category": "akuntansi"
+  },
+  {
+    "id": "YAKT-39",
+    "question": "Jika suatu Perusahaan ingin menyajikan informasi susunan pemegang saham nya, maka jenis laporan keuangan mana yang paling untuk menyajikan informasi ini ...",
+    "options": {
+      "A": "Catatan atas laporan keuangan",
+      "B": "Laporan posisi keuangan",
+      "C": "Laporan laba rugi dan penghasilan komprehensif lain",
+      "D": "Laporan perubahan ekuitas"
+    },
+    "answer": "A",
+    "explanation": "Informasi mendetail seperti profil manajemen dan susunan pemegang saham diungkap secara naratif di Catatan atas Laporan Keuangan.",
+    "category": "akuntansi"
+  },
+  {
+    "id": "YAKT-40",
+    "question": "Berikut adalah pos laporan keuangan yang ditutup di akhir periode pelaporan, kecuali ...",
+    "options": {
+      "A": "Beban pokok penjualan",
+      "B": "Pendapatan sewa",
+      "C": "Biaya dibayar dimuka",
+      "D": "Beban listrik"
+    },
+    "answer": "C",
+    "explanation": "Biaya dibayar dimuka adalah akun Riil (bersifat permanen di Neraca) sehingga tak akan di-nol-kan/ditutup setiap pergantian buku. [HATI-HATI! SOAL TRICKY: Kita harus sangat teliti membedakan akun riil (neraca) dan akun nominal (laba rugi). Biaya dibayar dimuka tidak ikut di-nol-kan karena merupakan akun riil yang saldonya akan terus dibawa ke periode akuntansi berikutnya.]",
+    "category": "akuntansi"
+  },
+  {
+    "id": "YALK-1",
+    "question": "Berikut merupakan analisis kualitas laporan laba rugi yang paling tepat, adalah:",
+    "options": {
+      "A": "Laba yang baik berasal dari pendapatan (beban) yang berulang",
+      "B": "Laba yang baik berasal dari pendapatan (beban) yang tidak berulang",
+      "C": "Ekuitas bertambah, akan lebih baik jika berasal dari saldo laba",
+      "D": "Ekuitas bertambah, akan lebih baik jika berasal dari modal saham"
+    },
+    "answer": "A",
+    "explanation": "Laba dinilai berkualitas tinggi (sustainable) jika mayoritas disumbang oleh operasional reguler yang bisa diprediksi terulang, bukan one-off.",
+    "category": "alk"
+  },
+  {
+    "id": "YALK-2",
+    "question": "Berikut merupakan analisis kualitas laporan perubahan ekuitas yang paling tepat, adalah:",
+    "options": {
+      "A": "Laba yang baik berasal dari pendapatan (beban) yang berulang",
+      "B": "Laba yang baik berasal dari pendapatan (beban) yang tidak berulang",
+      "C": "Ekuitas bertambah, akan lebih baik jika berasal dari saldo laba",
+      "D": "Ekuitas bertambah, akan lebih baik jika berasal dari modal saham"
+    },
+    "answer": "C",
+    "explanation": "Ekuitas yang melonjak berkat saldo laba internal menandakan profitabilitas riil dibanding sekadar injeksi suntikan pihak luar (saham).",
+    "category": "alk"
+  },
+  {
+    "id": "YALK-3",
+    "question": "Berikut merupakan analisis kualitas laporan posisi keuangan yang paling tepat, adalah:",
+    "options": {
+      "A": "Kenaikan aset yang berasal dari kenaikan liabilitas lebih baik daripada yang berasal dari kenaikan ekuitas",
+      "B": "Kenaikan aset yang berasal dari kenaikan ekuitas lebih baik daripada yang berasal dari kenaikan liabilitas",
+      "C": "Ekuitas bertambah, akan lebih baik jika berasal dari saldo laba",
+      "D": "Ekuitas bertambah, akan lebih baik jika berasal dari modal saham"
+    },
+    "answer": "B",
+    "explanation": "Pertumbuhan aset dengan tumpuan ekuitas internal sangat aman bagi likuiditas dan solvabilitas perusahaan.",
+    "category": "alk"
+  },
+  {
+    "id": "YALK-4",
+    "question": "Berikut merupakan analisis kualitas laporan arus kas yang paling tepat, adalah:",
+    "options": {
+      "A": "Arus kas dari aktivitas investasi positif lebih baik dibandingkan negatif",
+      "B": "Arus kas dari aktivitas pendanaan positif lebih baik dibandingkan negatif",
+      "C": "Arus kas dari aktivitas operasi negatif lebih baik dibandingkan positif",
+      "D": "Arus kas dari aktivitas operasi positif lebih baik dibandingkan negatif"
+    },
+    "answer": "D",
+    "explanation": "Arus kas bersih operasi yang surplus mengindikasikan kelayakan dan nafas utama bisnis sedang sehat.",
+    "category": "alk"
+  },
+  {
+    "id": "YALK-5",
+    "question": "Berikut merupakan tujuan dari analisis laporan keuangan, kecuali:",
+    "options": {
+      "A": "Pengambilan keputusan",
+      "B": "Evaluasi kinerja dan posisi keuangan masa lalu",
+      "C": "Pelengkap laporan keuangan",
+      "D": "Estimasi kinerja dan posisi keuangan masa depan"
+    },
+    "answer": "C",
+    "explanation": "Analisis dilakukan untuk membedah/mengekstrak laporan keuangan, bukan sebagai komponen pelengkap formatif dari laporannya itu sendiri.",
+    "category": "alk"
+  },
+  {
+    "id": "YALK-6",
+    "question": "Berikut beberapa teknik analisis laporan keuangan yang sering digunakan, kecuali:",
+    "options": {
+      "A": "Trend",
+      "B": "Common Size",
+      "C": "Rasio",
+      "D": "Pasar"
+    },
+    "answer": "D",
+    "explanation": "Istilah 'Pasar' lebih merujuk ke valuasi saham secara eksternal (bursa), sementara analisis teknikal murni berkutat pada Rasio, Common Size, Tren.",
+    "category": "alk"
+  },
+  {
+    "id": "YALK-7",
+    "question": "Berikut merupakan yang termasuk cakupan dalam analisis laporan keuangan, kecuali:",
+    "options": {
+      "A": "Efektivitas",
+      "B": "Likuiditas",
+      "C": "Solvabilitas",
+      "D": "Profitabilitas"
+    },
+    "answer": "A",
+    "explanation": "Efektivitas proses umumnya wewenang audit manajemen/SOP, sedangkan analisis finansial melingkupi rasio profitabilitas, likuiditas, solvabilitas.",
+    "category": "alk"
+  },
+  {
+    "id": "YALK-8",
+    "question": "Salah satu rasio keuangan yang dapat digunakan untuk mengukur kemampuan Perusahaan memenuhi utang jangka pendek, adalah:",
+    "options": {
+      "A": "Liabilities Ratio",
+      "B": "Current Ratio",
+      "C": "Average Days Inventory",
+      "D": "Gross Profit Ratio"
+    },
+    "answer": "B",
+    "explanation": "Current Ratio (Rasio Lancar) membandingkan langsung antara jumlah Aset Lancar terhadap Liabilitas Jangka Pendek.",
+    "category": "alk"
+  },
+  {
+    "id": "YALK-9",
+    "question": "Salah satu rasio keuangan yang dapat digunakan untuk mengukur kemampuan Perusahaan memenuhi utang jangka panjang, antara lain:",
+    "options": {
+      "A": "Liabilities Ratio",
+      "B": "Current Ratio",
+      "C": "Average Days Inventory",
+      "D": "Gross Profit Ratio"
+    },
+    "answer": "A",
+    "explanation": "Liabilities ratio semacam Debt to Equity menelusuri porsi pendanaan jangka panjang utang terhadap struktur modal.",
+    "category": "alk"
+  },
+  {
+    "id": "YALK-10",
+    "question": "Salah satu rasio keuangan yang dapat digunakan untuk mengukur kemampuan Perusahaan dalam memperoleh laba, antara lain:",
+    "options": {
+      "A": "Liabilities Ratio",
+      "B": "Current Ratio",
+      "C": "Average Days Inventory",
+      "D": "Gross Profit Ratio"
+    },
+    "answer": "D",
+    "explanation": "Gross Profit Ratio (serta net/operating profit margin) adalah matriks primer evaluasi tingkat profitabilitas/laba.",
+    "category": "alk"
+  },
+  {
+    "id": "YALK-11",
+    "question": "Salah satu rasio keuangan yang dapat digunakan untuk mengukur tingkat efisiensi Perusahaan dalam aktivitas operasionalnya, antara lain:",
+    "options": {
+      "A": "Liabilities Ratio",
+      "B": "Current Ratio",
+      "C": "Average Days Inventory",
+      "D": "Gross Profit Ratio"
+    },
+    "answer": "C",
+    "explanation": "Average Days Inventory mencerminkan tingkat perputaran dan efisiensi manajemen persediaan harian dalam operasional.",
+    "category": "alk"
+  },
+  {
+    "id": "YALK-12",
+    "question": "Rasio likuiditas berkaitan dengan kemampuan Perusahaan untuk:",
+    "options": {
+      "A": "Membiayai operasional perusahaan",
+      "B": "Memenuhi kewajiban jangka pendek",
+      "C": "Memenuhi kewajiban jangka panjang",
+      "D": "Kemampuan Perusahaan memanfaatkan aset untuk memperoleh laba"
+    },
+    "answer": "B",
+    "explanation": "Likuiditas mengindikasikan tingkat 'ketersediaan dana cair' guna memenuhi janji bayar yang jatuh tempo dalam kurun 1 tahun.",
+    "category": "alk"
+  },
+  {
+    "id": "YALK-13",
+    "question": "Rasio solvabilitas berkaitan dengan kemampuan Perusahaan untuk:",
+    "options": {
+      "A": "Memenuhi kewajiban jangka pendek",
+      "B": "Membiayai operasional perusahaan",
+      "C": "Memenuhi kewajiban jangka panjang",
+      "D": "Kemampuan Perusahaan memanfaatkan aset untuk memperoleh laba"
+    },
+    "answer": "C",
+    "explanation": "Berbeda dari likuiditas, solvabilitas mengkaji kapasitas bayar perusahaan secara total, khususnya menutupi kewajiban berjangka panjang jika dilikuidasi.",
+    "category": "alk"
+  },
+  {
+    "id": "YALK-14",
+    "question": "Berikut merupakan rasio yang menggunakan pos antar laporan keuangan:",
+    "options": {
+      "A": "Account receivable turnover",
+      "B": "Quick ratio",
+      "C": "Debt to equity ratio",
+      "D": "EBIT ratio"
+    },
+    "answer": "A",
+    "explanation": "Account Receivable Turnover merupakan rasio silang yang membagikan Penjualan (elemen Laba Rugi) terhadap Piutang (elemen Posisi Keuangan).",
+    "category": "alk"
+  },
+  {
+    "id": "YALK-15",
+    "question": "Yang bukan termasuk dalam rasio profitabilitas, adalah:",
+    "options": {
+      "A": "Gross profit margin",
+      "B": "Operating profit margin",
+      "C": "Earning before tax margin",
+      "D": "Profit sharing margin"
+    },
+    "answer": "D",
+    "explanation": "Profit sharing margin (bagi hasil) lazimnya dipakai di perbankan/akuntansi syariah khusus, tidak merujuk ke rasio margin standar.",
+    "category": "alk"
+  },
+  {
+    "id": "YALK-16",
+    "question": "Jika suatu Perusahaan membeli barang dagang dengan rata-rata harga beli sebesar Rp 100.000, dan menjualnya dengan rata-rata harga jual Rp 200.000, maka berapa gross profit margin ratio nya:",
+    "options": {
+      "A": "200%",
+      "B": "Tidak ada yang benar",
+      "C": "100%",
+      "D": "75%"
+    },
+    "answer": "B",
+    "explanation": "Kesalahan umum: menghitung dari Harga Beli (HPP). Margin laba dirumuskan atas penjualan: (Rp200.000 - Rp100.000) / Rp200.000 = 50%. Pilihan '50%' tidak ada, maka jawabannya Tidak Ada Yang Benar. [HATI-HATI! SOAL TRICKY: Ini jebakan analitis klasik! Sangat banyak yang refleks menghitung margin laba kotor dari nilai Harga Beli atau HPP (100k/100k = 100%). Kenyataannya, rasio margin selalu dihitung dari Pendapatan/Harga Jual.]",
+    "category": "alk"
+  },
+  {
+    "id": "YALK-17",
+    "question": "Average days inventory yang semakin kecil atau berkurang, mencerminkan:",
+    "options": {
+      "A": "Jumlah hari yang diperlukan Perusahaan dalam menjual barang dagangannya semakin cepat",
+      "B": "Jumlah hari yang diperlukan Perusahaan dalam menjual barang dagangannya semakin lama",
+      "C": "Jumlah hari yang diperlukan Perusahaan dalam membeli barang dagangannya semakin cepat",
+      "D": "Jumlah hari yang diperlukan Perusahaan dalam membeli barang dagangannya semakin lama"
+    },
+    "answer": "A",
+    "explanation": "Jika rasio days inventory mengecil, artinya jeda persediaan mengendap di gudang semakin singkat alias laris (terjual lebih cepat).",
+    "category": "alk"
+  },
+  {
+    "id": "YALK-18",
+    "question": "Diketahui Perusahaan A mempunyai Utang Bank sebesar Rp 100 juta dengan bunga sebesar 10% p.a dan Utang Usaha sebesar Rp 200 juta, dan Perusahaan B mempunyai Utang Bank sebesar Rp 0 dan Utang Usaha sebesar Rp 1 milyar, manakah pernyataan berikut yang benar:",
+    "options": {
+      "A": "Perusahaan A akan mempunyai laba lebih besar daripada Perusahaan B dengan asumsi semua pendapatan dan beban selain terkait dengan rasio diatas adalah sama.",
+      "B": "Perusahaan B akan mempunyai laba lebih besar daripada Perusahaan A dengan asumsi semua pendapatan dan beban selain terkait dengan rasio diatas adalah sama",
+      "C": "Perusahaan A akan mempunyai kinerja lebih baik karena utang nya lebih kecil",
+      "D": "Perusahaan B akan mempunyai kinerja lebih baik karena utang nya lebih besar"
+    },
+    "answer": "B",
+    "explanation": "Meskipun utang usahanya raksasa (Rp 1 Miliar), Perusahaan B bebas bunga kredit bank (bunga 0). Maka laba nettonya tidak tereduksi beban finansial (lebih tinggi dari A).",
+    "category": "alk"
+  },
+  {
+    "id": "YALK-19",
+    "question": "Average collection period yang semakin besar atau bertambah, mencerminkan:",
+    "options": {
+      "A": "Jumlah hari yang diperlukan Perusahaan untuk melakukan penjualan kredit nya semakin lama",
+      "B": "Jumlah hari yang diperlukan Perusahaan untuk melakukan penjualan kredit nya semakin cepat",
+      "C": "Jumlah hari yang diperlukan Perusahaan untuk menagih piutang hasil penjualan kredit nya semakin lama",
+      "D": "Jumlah hari yang diperlukan Perusahaan untuk menagih piutang hasil penjualan kredit nya semakin cepat"
+    },
+    "answer": "C",
+    "explanation": "Membesarnya jangka waktu koleksi bermakna uang perusahaan macet di tangan konsumen dan memakan waktu penagihan yang lebih lama.",
+    "category": "alk"
+  },
+  {
+    "id": "YALK-20",
+    "question": "Salah satu metode yang bisa digunakan untuk melakukan analisis risiko kebangkrutan suatu Perusahaan, antara lain:",
+    "options": {
+      "A": "Tidak ada satupun yang benar",
+      "B": "Analisis laporan keuangan proforma",
+      "C": "Analisis profitabilitas",
+      "D": "Altman Z Score"
+    },
+    "answer": "D",
+    "explanation": "Altman Z-Score adalah model matematis (multi-variabel) paling terkenal dalam ranah analitik untuk mendeteksi ancaman kebangkrutan emiten.",
+    "category": "alk"
+  }
+]
